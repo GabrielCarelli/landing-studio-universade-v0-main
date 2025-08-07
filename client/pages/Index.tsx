@@ -69,7 +69,7 @@ const useFloorPlanModal = () => {
 
 // Main sections component
 const LandingSections = () => (
-  <>
+  <div>
     <HeroSection />
     <GallerySection />
     <Decorated />
@@ -79,7 +79,7 @@ const LandingSections = () => (
     <Location />
     <Contact />
     <Footer />
-  </>
+  </div>
 );
 
 // Modals component
@@ -119,7 +119,7 @@ export default function Index() {
   const floorPlanModal = useFloorPlanModal();
 
   return (
-    <div className="min-h-screen bg-white font-fanun">
+    <div className="w-full max-content-wrapper">
       <Header />
       <LandingSections />
       <FloatingChat />

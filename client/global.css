@@ -96,6 +96,13 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
+@media (min-width: 1921px) {
+  .max-content-wrapper {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 @layer base {
   * {

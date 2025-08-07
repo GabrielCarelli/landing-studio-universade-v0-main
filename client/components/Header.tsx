@@ -46,114 +46,101 @@ const CloseIcon = () => (
   </svg>
 );
 
+function Logo() {
+  return <h1 className="text-studio-dark text-2xl font-fagun font-black leading-7">Studio Universidade</h1>;
+}
+
+function ContactButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="flex h-10 px-8 py-4 justify-center items-center gap-2.5 rounded-full bg-studio-dark text-white font-fanun text-xl font-normal leading-5"
+    >
+      Entre em contato
+    </button>
+  );
+}
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
     setIsMenuOpen(false);
   };
 
-  const renderNavButtons = (baseClasses: string) =>
+  const renderButtons = (className: string) =>
     NAV_ITEMS.map(({ id, label }) => (
       <button
         key={id}
         onClick={() => scrollToSection(id)}
-        className={baseClasses + " hover:text-studio-blue transition-colors"}
+        className={className + " hover:text-studio-blue transition-colors"}
       >
         {label}
       </button>
     ));
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white">
-    {/* Desktop Header */}
-      <div className="hidden lg:flex w-full h-20 px-10 items-center">
-        {/* logo fica “encaixada” à esquerda */}
-        <h1 className="text-studio-dark text-2xl font-fagun font-black leading-7">
-          Studio Universidade
-        </h1>
-
-        {/* nav preenche o meio e centraliza os botões */}
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white max-content-wrapper">
+      {/* Desktop */}
+      <div className="hidden lg:flex  h-20 px-10 items-center max-content-wrapper w-full">
+        <Logo />
         <nav className="flex flex-1 justify-center items-center gap-16">
-          {renderNavButtons("text-studio-dark font-fagun font-bold text-xl leading-7")}
+          {renderButtons("text-studio-dark font-fagun font-bold text-xl leading-7")}
         </nav>
-
-        {/* grupo do Insta + botão encaixados à direita */}
         <div className="flex items-center gap-16">
           <SocialIcon />
-          <button
-            onClick={() => scrollToSection("contato")}
-            className="flex h-10 px-8 py-4 justify-center items-center gap-2.5 rounded-full bg-studio-dark text-white font-fanun text-xl font-normal leading-5"
-          >
-            Entre em contato
-          </button>
+          <ContactButton onClick={() => scrollToSection("contato")} />
         </div>
       </div>
 
-
-      <div className="hidden md:flex lg:hidden w-full h-20 px-10 justify-between items-center">
+      {/* Tablet */}
+      <div className="hidden md:flex lg:hidden w-full h-20 px-10 justify-between items-center max-content-wrapper">
         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Menu">
           <MenuIcon />
         </button>
-        <h1 className="text-studio-dark font-fanun text-base font-bold leading-7">Studio Universidade</h1>
+        <Logo />
         <div className="flex items-center gap-4">
           <SocialIcon />
-          <button
-            onClick={() => scrollToSection("contato")}
-            className="flex h-10 px-8 py-4 justify-center items-center gap-2.5 rounded-full bg-studio-dark text-white font-fanun text-xl font-normal leading-5"
-          >
-            Entre em contato
-          </button>
+          <ContactButton onClick={() => scrollToSection("contato")} />
         </div>
       </div>
 
-      <div className="flex md:hidden flex-col w-full bg-white">
+      {/* Mobile */}
+      <div className="flex md:hidden flex-col w-full bg-white max-content-wrapper">
         <div className="flex w-full h-16 px-6 justify-between items-center">
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Menu">
             <MenuIcon />
           </button>
-          <h1 className="text-studio-dark font-fanun text-base font-bold leading-7">Studio Universidade</h1>
+          <Logo />
           <SocialIcon />
         </div>
-        <button
-          onClick={() => scrollToSection("contato")}
-          className="flex h-10 mx-6 mb-4 px-8 py-4 justify-center items-center gap-2.5 rounded-full bg-studio-dark text-white font-fanun text-xl font-normal leading-5"
-        >
-          Entre em contato
-        </button>
+        <ContactButton onClick={() => scrollToSection("contato")} />
         <div className="flex mx-6 mb-6 px-4 py-2 justify-center items-center gap-1 bg-studio-yellow shadow-[0_4px_12px_0_rgba(0,0,0,0.12)] rounded">
           <span className="text-studio-blue text-center font-fanun text-base font-normal">Previsão de entrega em:</span>
           <span className="text-studio-blue font-fanun text-xl font-black">01/09/2025</span>
         </div>
       </div>
 
+      {/* Slide Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-50 md:relative lg:hidden">
           <div className="fixed inset-0 bg-black bg-opacity-50 md:hidden" onClick={() => setIsMenuOpen(false)} />
           <div className="fixed top-0 left-0 w-full md:w-[279px] bg-white rounded-b-[4px] shadow-lg md:absolute md:top-20 md:left-10">
-            {/* Header */}
             <div className="flex justify-between items-center px-6 py-4">
-              <h2 className="text-studio-dark font-fanun text-base font-bold leading-7">Studio Universidade</h2>
+              <Logo />
               <button onClick={() => setIsMenuOpen(false)} aria-label="Close menu">
                 <CloseIcon />
               </button>
             </div>
-            {/* Navigation */}
             <div className="px-6 py-4 border-t border-b border-black border-opacity-30">
               <nav className="flex flex-col gap-6">
-                {renderNavButtons("text-studio-dark font-fanun text-xl font-normal leading-7 text-left")}
+                {renderButtons("text-studio-dark font-fanun text-xl font-normal leading-7 text-left")}
               </nav>
             </div>
-            {/* Contact */}
             <div className="px-6 py-6">
-              <button
-                onClick={() => scrollToSection("contato")}
-                className="w-full h-10 px-8 py-4 flex justify-center items-center gap-2.5 rounded-full bg-studio-dark text-white font-fanun text-xl font-normal leading-5"
-              >
-                Entre em contato
-              </button>
+              <ContactButton onClick={() => scrollToSection("contato")} />
             </div>
           </div>
         </div>
