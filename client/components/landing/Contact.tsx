@@ -6,15 +6,19 @@ import { useState } from "react";
 
 
 const HUBSPOT_PREFIX = ""; // 🔁 Troque aqui o prefixo que quer enviar (ou deixe "" para usar nomes padrão)
+const FIXED_CITY = "Campinas";
+
+
 
 const portalId = import.meta.env.VITE_PUBLIC_HUBSPOT_PORTAL_ID!;
-const formId = import.meta.env.VITE_PUBLIC_HUBSPOT_FORM_ID_NEW_HOME!;
+const formId = import.meta.env.VITE_PUBLIC_HUBSPOT_FORM_ID_MONETIZE_RENT!;
 
 type FormValues = {
   nome: string;
   email: string;
   telefone?: string;
   mensagem?: string;
+  city: string;
 };
 
 if (!portalId || !formId){
@@ -32,26 +36,9 @@ function toHubspotFields(data: FormValues) {
       { name: `${HUBSPOT_PREFIX}_email`, value: data.email },
       data.telefone ? { name: `${HUBSPOT_PREFIX}_telefone`, value: data.telefone } : null,
       data.mensagem ? { name: `${HUBSPOT_PREFIX}_mensagem`, value: data.mensagem } : null,
-      // Exemplo de meta extra:
       { name: `${HUBSPOT_PREFIX}_origem_form`, value: "Contato - Studio Universidades" },
-    ].filter(Boolean);[
-  {
-    "name": "firstname",
-    "value": "teste0908"
-  },
-  {
-    "name": "email",
-    "value": "teste0908@gmail.com"
-  },
-  {
-    "name": "phone",
-    "value": "090909090908"
-  },
-  {
-    "name": "message",
-    "value": "teste0908"
-  }
-]
+      { name: `${HUBSPOT_PREFIX}_city`, value: FIXED_CITY }, // 👈 cidade fixa só no payload
+    ].filter(Boolean) as { name: string; value: string }[];
   }
 
   return [
@@ -59,8 +46,10 @@ function toHubspotFields(data: FormValues) {
     { name: "email", value: data.email },
     data.telefone ? { name: "phone", value: data.telefone } : null,
     data.mensagem ? { name: "message", value: data.mensagem } : null,
-  ].filter(Boolean);
+    { name: "city", value: FIXED_CITY }, // 👈 cidade fixa só no payload
+  ].filter(Boolean) as { name: string; value: string }[];
 }
+
 
 async function submitToHubspot(payload: any) {
   const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
