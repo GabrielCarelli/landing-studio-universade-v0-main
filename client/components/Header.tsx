@@ -15,7 +15,9 @@ const NAV_ITEMS: NavItem[] = [
 
 const SocialIcon = () => (
   <a
-    href="#"
+    href="https://www.instagram.com/housebitapp/"
+    target="_blank"
+    rel="noopener noreferrer"
     className="w-6 h-6 text-studio-dark hover:text-studio-blue transition-colors"
     aria-label="Instagram"
   >
@@ -117,7 +119,7 @@ export function Header() {
           <SocialIcon />
         </div>
         <ContactButton onClick={() => scrollToSection("contato")} />
-        <div className="flex mx-6 mb-6 px-4 py-2 justify-center items-center gap-1 bg-studio-yellow shadow-[0_4px_12px_0_rgba(0,0,0,0.12)] rounded">
+        <div className="flex mx-6 mb-6 px-4 py-2 justify-center items-center gap-1 bg-studio-yellow shadow-[0_4px_12px_0_rgba(0,0,0,0.12)]">
           <span className="text-studio-blue text-center font-fanun text-base font-normal">Previsão de entrega em:</span>
           <span className="text-studio-blue font-fanun text-xl font-black">01/09/2025</span>
         </div>

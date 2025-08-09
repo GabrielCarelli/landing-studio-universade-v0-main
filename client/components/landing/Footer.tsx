@@ -67,13 +67,18 @@ const Footer = () => {
                     <span className="text-studio-dark font-fanun text-xl font-normal text-center">
                       Quer anunciar seu empreendimento com a Housebit?
                     </span>
-                    <button className="flex h-10 px-4 py-2 flex-col justify-center items-center gap-2.5 rounded-full border border-studio-blue">
+                    <a
+                      href="https://www.housebit.com.br/find"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-10 px-4 py-2 flex-col justify-center items-center gap-2.5 rounded-full border border-studio-blue"
+                    >
                       <div className="flex items-center gap-2">
                         <span className="text-studio-blue font-fanun text-base font-normal">
                           Fale conosco
                         </span>
                       </div>
-                    </button>
+                    </a>
                   </div>
                 </div>
               </footer>

@@ -17,7 +17,7 @@ const Diferentials = () => {
 
         <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-20 lg:gap-8 w-full">
           <div className="flex w-full lg:w-[339px] justify-center items-center gap-8">
-            <div className="flex w-19 h-19 p-[22px] justify-center items-center flex-shrink-0 rounded-2xl bg-gray-200/20">
+            <div className="flex w-19 h-19 p-[22px] justify-center items-center flex-shrink-0 rounded-2xl bg-gray-200/40">
               <svg
                 width="32"
                 height="32"
@@ -45,7 +45,7 @@ const Diferentials = () => {
           </div>
 
           <div className="flex w-full lg:w-[339px] justify-center items-center gap-8">
-            <div className="flex w-19 h-19 p-[22px] justify-center items-center flex-shrink-0 rounded-2xl bg-gray-200/20">
+            <div className="flex w-19 h-19 p-[22px] justify-center items-center flex-shrink-0 rounded-2xl bg-gray-200/40">
               <svg
                 width="32"
                 height="32"
@@ -74,7 +74,7 @@ const Diferentials = () => {
           </div>
 
           <div className="flex w-full lg:w-[339px] justify-center items-center gap-8">
-            <div className="flex w-19 h-19 p-[22px] justify-center items-center flex-shrink-0 rounded-2xl bg-gray-200/20">
+            <div className="flex w-19 h-19 p-[22px] justify-center items-center flex-shrink-0 rounded-2xl bg-gray-200/40">
               <svg
                 width="32"
                 height="32"

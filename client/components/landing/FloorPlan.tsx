@@ -1,37 +1,44 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { FloorPlanModal } from "../FloorPlanModal";
 
-const FloorPlan = () => {
-     const [isFloorPlanModalOpen, setIsFloorPlanModalOpen] = useState(false)
-
-    const handleFloorPlanClick = () => {
-    setIsFloorPlanModalOpen(true);
-  };
-  const useFloorPlanModal = () => {
+/** Hook do modal (reutilizável) */
+function useFloorPlanModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const openModal = useCallback(() => setIsOpen(true), []);
+  const closeModal = useCallback(() => setIsOpen(false), []);
+  return { isOpen, openModal, closeModal };
+}
 
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
-
-  return {
-    isOpen,
-    openModal,
-    closeModal,
-  };
+const FLOORPLAN = {
+  title: "Studio funcional com 24m²",
+  description:
+    "Ambiente compacto e bem distribuído, ideal para quem busca praticidade no dia a dia.",
+  image:
+    "https://api.builder.io/api/v1/image/assets/TEMP/0b789879d13b58026b4a6223755db5cd9072ccd3?width=800",
 };
-  const floorPlanModal = useFloorPlanModal();
 
-    return(
-        <><section
+const FloorPlan = () => {
+  const modal = useFloorPlanModal();
+
+  useEffect(() => {
+    if (!modal.isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, [modal.isOpen]);
+
+  return (
+    <>
+      <section
         id="planta"
-        className="flex max-w-full px-6 sm:px-6 md:px-10 lg:px-20 py-6 justify-between items-center"
+        className="w-full max-w-full px-6 sm:px-6 md:px-10 lg:px-20 py-12"
       >
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-10 w-full">
-          <div className="flex w-full lg:w-[494px] flex-col justify-center items-start gap-6">
-            <h2 className="text-studio-dark font-fanun text-xl sm:text-2xl md:text-2xl lg:text-[32px] font-black">
+        <div className="mx-auto flex w-full items-start justify-between gap-8 lg:gap-12">
+          <div className="w-full lg:max-w-[560px]">
+            <h2 className="text-studio-dark font-fanun text-3xl sm:text-4xl lg:text-[40px] leading-tight font-black">
               Layouts pensados para sua rotina
             </h2>
-            <p className="text-studio-gray font-fanun text-lg sm:text-xl md:text-xl lg:text-xl font-normal">
+            <p className="mt-4 text-studio-gray font-fanun text-base sm:text-lg lg:text-xl max-w-[520px]">
               Conheça os layouts disponíveis e escolha o que melhor se adapta ao
               seu estilo de vida. O Studio Universidades oferece plantas
               otimizadas para estudantes e jovens profissionais, com ambientes
@@ -40,97 +47,123 @@ const FloorPlan = () => {
             </p>
           </div>
 
-          {/* Desktop/Tablet Card */}
-          <div className="hidden md:flex w-full lg:w-[666px] md:w-[560px] h-52 px-6 lg:px-12 py-6 items-center gap-6 rounded-3xl bg-studio-gray-bg">
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/0b789879d13b58026b4a6223755db5cd9072ccd3?width=320"
-              alt="Studio floor plan"
-              className="w-40 h-40 flex-shrink-0 rounded object-cover" />
-            <div className="flex flex-col justify-center items-start gap-6 w-full lg:w-[280px]">
-              <div className="flex flex-col items-start gap-2 w-full">
-                <h3 className="text-studio-dark font-fanun text-xl font-bold leading-[120%]">
-                  Studio funcional com 24m²
-                </h3>
-                <p className="text-studio-dark font-fanun text-base font-normal leading-[120%] max-w-[386px]">
-                  Ambiente compacto e bem distribuído, ideal para quem busca
-                  praticidade no dia a dia.
-                </p>
-              </div>
-              <button
-                onClick={handleFloorPlanClick}
-                className="flex h-12 justify-center items-center hover:opacity-80 transition-opacity"
-              >
-                <div className="flex justify-center items-center rounded-full">
-                  <div className="flex px-3 py-1.5 justify-center items-center gap-1">
-                    <span className="text-studio-dark font-fanun text-sm font-normal leading-5 tracking-[0.1px]">
-                      Ver detalhes
-                    </span>
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 21"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M13.4788 11.667H3.33301V10.0003H13.4788L8.81217 5.33366L9.99967 4.16699L16.6663 10.8337L9.99967 17.5003L8.81217 16.3337L13.4788 11.667Z"
-                        fill="#161F2E" />
-                    </svg>
-                  </div>
+          <article
+            className="
+              hidden md:block w-full max-w-[720px]
+              rounded-[24px] bg-studio-gray-bg
+              shadow-sm
+              px-6 lg:px-8 py-6
+            "
+            aria-label="Planta destaque"
+          >
+            <div className="flex items-center gap-5 lg:gap-6">
+              <div className="shrink-0">
+                <div className="rounded-xl bg-white p-2 shadow-sm">
+                  <img
+                    src={FLOORPLAN.image}
+                    alt="Planta baixa do studio funcional"
+                    className="w-[84px] h-[84px] object-cover rounded-md"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
-              </button>
-            </div>
-          </div>
+              </div>
 
-          {/* Mobile Card */}
-          <div className="flex md:hidden w-full flex-col px-6 py-6 gap-6 rounded-3xl bg-studio-gray-bg">
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/7aff12dfac50da650d6222cfb713f3013df459b2?width=528"
-              alt="Studio floor plan"
-              className="h-[243px] w-full rounded object-cover" />
-            <div className="flex flex-col justify-center items-start gap-6 w-full">
-              <div className="flex flex-col items-start gap-2 w-full">
-                <h3 className="text-studio-dark font-fanun text-xl font-bold leading-[120%]">
-                  Studio funcional com 24m²
+              <div className="flex-1 min-w-0">
+                <h3 className="text-studio-dark font-fanun text-lg sm:text-xl font-extrabold leading-tight">
+                  Studio funcional com 24m<sup className="align-super text-xs">2</sup>
                 </h3>
-                <p className="text-studio-dark font-fanun text-base font-normal leading-[120%]">
-                  Ambiente compacto e bem distribuído, ideal para quem busca
-                  praticidade no dia a dia.
+                <p className="mt-1 text-studio-dark/80 font-fanun text-sm sm:text-base leading-snug">
+                  {FLOORPLAN.description}
                 </p>
+
+                <button
+                  type="button"
+                  onClick={modal.openModal}
+                  className="
+                    mt-4 inline-flex items-center gap-2
+                    text-studio-dark font-fanun text-sm sm:text-base
+                    hover:opacity-90 transition
+                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-dark/40 rounded-md
+                  "
+                  aria-label="Ver detalhes da planta"
+                >
+                  Ver detalhes
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 20 21"
+                    fill="none"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="translate-x-0 group-hover:translate-x-0.5 transition-transform"
+                  >
+                    <path
+                      d="M13.4788 11.667H3.33301V10.0003H13.4788L8.81217 5.33366L9.99967 4.16699L16.6663 10.8337L9.99967 17.5003L8.81217 16.3337L13.4788 11.667Z"
+                      fill="#161F2E"
+                    />
+                  </svg>
+                </button>
               </div>
+            </div>
+          </article>
+        </div>
+
+        <article
+          className="
+            md:hidden mt-6 w-full rounded-[24px] bg-studio-gray-bg shadow-sm
+            px-5 py-6
+          "
+          aria-label="Planta destaque"
+        >
+          <div className="flex items-center gap-4">
+            <div className="rounded-xl bg-white p-2 shadow-sm shrink-0">
+              <img
+                src={FLOORPLAN.image}
+                alt="Planta baixa do studio funcional"
+                className="w-[76px] h-[76px] object-cover rounded-md"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            <div className="flex-1 min-w-0">
+              <h3 className="text-studio-dark font-fanun text-lg font-extrabold leading-tight">
+                Studio funcional com 24m<sup className="align-super text-[10px]">2</sup>
+              </h3>
+              <p className="mt-1 text-studio-dark/80 font-fanun text-sm leading-snug">
+                {FLOORPLAN.description}
+              </p>
+
               <button
-                onClick={handleFloorPlanClick}
-                className="flex h-12 justify-center items-center hover:opacity-80 transition-opacity"
+                type="button"
+                onClick={modal.openModal}
+                className="mt-4 inline-flex items-center gap-1.5 text-studio-dark font-fanun text-sm hover:opacity-90 transition"
+                aria-label="Ver detalhes da planta"
               >
-                <div className="flex justify-center items-center rounded-full">
-                  <div className="flex px-3 py-1.5 justify-center items-center gap-1">
-                    <span className="text-studio-dark font-fanun text-sm font-normal leading-5 tracking-[0.1px]">
-                      Ver detalhes
-                    </span>
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M13.4788 10.8335H3.33301V9.16683H13.4788L8.81217 4.50016L9.99967 3.3335L16.6663 10.0002L9.99967 16.6668L8.81217 15.5002L13.4788 10.8335Z"
-                        fill="#161F2E" />
-                    </svg>
-                  </div>
-                </div>
+                Ver detalhes
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 20 21"
+                  fill="none"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M13.4788 11.667H3.33301V10.0003H13.4788L8.81217 5.33366L9.99967 4.16699L16.6663 10.8337L9.99967 17.5003L8.81217 16.3337L13.4788 11.667Z"
+                    fill="#161F2E"
+                  />
+                </svg>
               </button>
             </div>
           </div>
-        </div>
+        </article>
       </section>
-      <FloorPlanModal
-          isOpen={floorPlanModal.isOpen}
-          onClose={floorPlanModal.closeModal} 
-      />
+
+      <FloorPlanModal isOpen={modal.isOpen} onClose={modal.closeModal} />
     </>
-    )
-}
+  );
+};
 
 export default FloorPlan;

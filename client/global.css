@@ -113,3 +113,23 @@
     @apply bg-background text-foreground;
   }
 }
+@layer utilities {
+  .glass {
+    @apply bg-white/55 backdrop-blur-md backdrop-saturate-150
+           shadow-md rounded-[24px]
+           ring-1 ring-white/50
+           border border-white/30
+           /* melhora bordas no iOS/Safari */
+           bg-clip-padding;
+  }
+
+  /* Dark mode opcional */
+  .dark .glass {
+    @apply bg-white/10 ring-white/20 border-white/10;
+  }
+
+  /* Fallback se o browser não suportar backdrop-filter */
+  .no-backdrop .glass {
+    @apply bg-white/80;
+  }
+}

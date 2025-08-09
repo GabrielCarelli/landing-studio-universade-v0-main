@@ -1,110 +1,221 @@
-const Contact = () => {
-    return(
-          <section
-                id="contato"
-                className="flex flex-col lg:flex-row lg:h-[600px] px-6 sm:px-6 md:px-10 lg:px-20 items-center gap-10 lg:gap-20 py-20"
-              >
-                <div className="flex w-full lg:w-[580px] flex-col justify-center items-start gap-6">
-                  <div className="flex flex-col items-start gap-6 w-full">
-                    <h2 className="text-studio-dark font-fanun text-2xl font-black">
-                      Quero morar aqui
-                    </h2>
-                    <p className="text-studio-gray font-fanun text-xl font-normal">
-                      Ficou interessado? Nossos consultores vão entrar em contato.
-                    </p>
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g clipPath="url(#clip0_1_1290)">
-                        <path
-                          d="M17.5 6.5H17.51M7 2H17C19.7614 2 22 4.23858 22 7V17C22 19.7614 19.7614 22 17 22H7C4.23858 22 2 19.7614 2 17V7C2 4.23858 4.23858 2 7 2ZM16 11.37C16.1234 12.2022 15.9813 13.0522 15.5938 13.799C15.2063 14.5458 14.5931 15.1514 13.8416 15.5297C13.0901 15.9079 12.2384 16.0396 11.4078 15.9059C10.5771 15.7723 9.80976 15.3801 9.21484 14.7852C8.61992 14.1902 8.22773 13.4229 8.09407 12.5922C7.9604 11.7616 8.09207 10.9099 8.47033 10.1584C8.84859 9.40685 9.45419 8.79374 10.201 8.40624C10.9478 8.01874 11.7978 7.87659 12.63 8C13.4789 8.12588 14.2649 8.52146 14.8717 9.12831C15.4785 9.73515 15.8741 10.5211 16 11.37Z"
-                          stroke="#161F2E"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_1_1290">
-                          <rect width="24" height="24" fill="white" />
-                        </clipPath>
-                      </defs>
-                    </svg>
-                  </div>
-        
-                  <form className="flex flex-col items-start gap-6 w-full">
-                    <div className="flex flex-col items-start gap-1 w-full">
-                      <label className="text-studio-dark font-fanun text-sm font-normal leading-4 tracking-[0.175px]">
-                        Nome
-                      </label>
-                      <div className="h-10 w-full relative">
-                        <div className="w-full h-10 rounded-full border border-studio-gray-light bg-white"></div>
-                        <input
-                          type="text"
-                          placeholder="Maria da Silva"
-                          className="absolute left-5 top-3 w-full h-4 text-studio-gray-light font-fanun text-base font-normal bg-transparent border-none outline-none"
-                        />
-                      </div>
-                    </div>
-        
-                    <div className="flex flex-col items-start gap-1 w-full">
-                      <label className="text-studio-dark font-fanun text-sm font-normal leading-4 tracking-[0.175px]">
-                        E-mail
-                      </label>
-                      <div className="h-10 w-full relative">
-                        <div className="w-full h-10 rounded-full border border-studio-gray-light bg-white"></div>
-                        <input
-                          type="email"
-                          placeholder="Campinas"
-                          className="absolute left-5 top-3 w-full h-4 text-studio-gray-light font-fanun text-base font-normal bg-transparent border-none outline-none"
-                        />
-                      </div>
-                    </div>
-        
-                    <div className="flex flex-col items-start gap-1 w-full">
-                      <label className="text-studio-dark font-fanun text-sm font-normal leading-4 tracking-[0.175px]">
-                        Telefone <span>(opcional)</span>
-                      </label>
-                      <div className="h-10 w-full relative">
-                        <div className="w-full h-10 rounded-full border border-studio-gray-light bg-white"></div>
-                        <input
-                          type="tel"
-                          placeholder="(11) 99999-1111"
-                          className="absolute left-5 top-3 w-full h-4 text-studio-gray-light font-fanun text-base font-normal bg-transparent border-none outline-none"
-                        />
-                      </div>
-                    </div>
-        
-                    <div className="flex flex-col items-start gap-1 w-full">
-                      <label className="text-studio-dark font-fanun text-sm font-normal leading-4 tracking-[0.175px]">
-                        Mensagem <span>(opcional)</span>
-                      </label>
-                      <div className="h-20 w-full relative">
-                        <div className="w-full h-20 rounded-2xl border border-studio-gray-light bg-white"></div>
-                        <textarea
-                          placeholder="(11) 99999-1111"
-                          className="absolute left-5 top-3 w-full h-16 text-studio-gray-light font-fanun text-base font-normal bg-transparent border-none outline-none resize-none"
-                        />
-                      </div>
-                    </div>
-        
-                    <button className="flex h-10 px-[70px] py-4 justify-center items-center gap-2.5 w-full rounded-full bg-studio-dark text-white font-fanun text-lg sm:text-xl font-normal hover:bg-opacity-90 transition-all">
-                      Receber proposta personalizada
-                    </button>
-                  </form>
-                </div>
-        
-                <img
-                  src="https://api.builder.io/api/v1/image/assets/TEMP/a0240e2885e5b71dcdcd5ec7119ff9d9c9f469c2?width=1240"
-                  alt="Studio apartment exterior"
-                  className="w-full lg:h-[605px] lg:flex-1 rounded-lg object-cover"
-                />
-              </section>
-    )
+"use client";
+
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+
+
+
+const HUBSPOT_PREFIX = ""; // 🔁 Troque aqui o prefixo que quer enviar (ou deixe "" para usar nomes padrão)
+
+const portalId = import.meta.env.VITE_PUBLIC_HUBSPOT_PORTAL_ID!;
+const formId = import.meta.env.VITE_PUBLIC_HUBSPOT_FORM_ID_NEW_HOME!;
+
+type FormValues = {
+  nome: string;
+  email: string;
+  telefone?: string;
+  mensagem?: string;
+};
+
+if (!portalId || !formId){
+  console.log("hubspots deram erro")
 }
+function getHubspotUtk() {
+  const match = document.cookie.match(/hubspotutk=([^;]+)/);
+  return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+function toHubspotFields(data: FormValues) {
+  if (HUBSPOT_PREFIX) {
+    return [
+      { name: `${HUBSPOT_PREFIX}_nome`, value: data.nome },
+      { name: `${HUBSPOT_PREFIX}_email`, value: data.email },
+      data.telefone ? { name: `${HUBSPOT_PREFIX}_telefone`, value: data.telefone } : null,
+      data.mensagem ? { name: `${HUBSPOT_PREFIX}_mensagem`, value: data.mensagem } : null,
+      // Exemplo de meta extra:
+      { name: `${HUBSPOT_PREFIX}_origem_form`, value: "Contato - Studio Universidades" },
+    ].filter(Boolean);[
+  {
+    "name": "firstname",
+    "value": "teste0908"
+  },
+  {
+    "name": "email",
+    "value": "teste0908@gmail.com"
+  },
+  {
+    "name": "phone",
+    "value": "090909090908"
+  },
+  {
+    "name": "message",
+    "value": "teste0908"
+  }
+]
+  }
+
+  return [
+    { name: "firstname", value: data.nome },
+    { name: "email", value: data.email },
+    data.telefone ? { name: "phone", value: data.telefone } : null,
+    data.mensagem ? { name: "message", value: data.mensagem } : null,
+  ].filter(Boolean);
+}
+
+async function submitToHubspot(payload: any) {
+  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err?.message || `Erro HubSpot: ${res.status}`);
+  }
+}
+
+const Contact = () => {
+  const { register, handleSubmit, reset, formState } = useForm<FormValues>({
+    defaultValues: { nome: "", email: "", telefone: "", mensagem: "" },
+  });
+  const { isSubmitting } = formState;
+  const [sent, setSent] = useState(false);
+
+  const onSubmit = async (data: FormValues) => {
+    try {
+      const fields = toHubspotFields(data);
+
+      const payload = {
+        fields,
+      };
+
+      await submitToHubspot(payload);
+      setSent(true);
+      reset();
+    } catch (e) {
+      console.error(e);
+      alert("Não foi possível enviar agora. Tente novamente em instantes.");
+    }
+  };
+
+  return (
+    <section
+      id="contato"
+      className="flex flex-col lg:flex-row lg:h-[600px] px-6 sm:px-6 md:px-10 lg:px-20 items-center gap-10 lg:gap-20 py-20 mb-20"
+    >
+      <div className="flex w-full lg:w-[580px] flex-col justify-center items-start gap-6">
+        <div className="flex flex-col items-start gap-6 w-full">
+          <h2 className="text-studio-dark font-fanun text-2xl font-black">Quero morar aqui</h2>
+          <p className="text-studio-gray font-fanun text-xl font-normal">
+            Ficou interessado? Nossos consultores vão entrar em contato.
+          </p>
+
+          <a
+            href="https://www.instagram.com/housebitapp/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-6 h-6 text-studio-dark hover:text-studio-blue transition-colors"
+            aria-label="Instagram"
+          >
+            {/* ...teu SVG do Instagram aqui... */}
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">{/* ... */}</svg>
+          </a>
+        </div>
+
+        {/* FORM */}
+        {!sent ? (
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-start gap-6 w-full">
+            {/* Nome */}
+            <div className="flex flex-col items-start gap-1 w-full">
+              <label className="text-studio-dark font-fanun text-sm">Nome</label>
+              <div className="h-10 w-full relative">
+                <input
+                  type="text"
+                  placeholder="Maria da Silva"
+                  {...register("nome", { required: true, minLength: 2 })}
+                  className="w-full h-10 rounded-full border border-studio-gray-light bg-white px-5 text-studio-dark font-fanun text-base outline-none"
+                />
+              </div>
+            </div>
+
+            {/* E-mail */}
+            <div className="flex flex-col items-start gap-1 w-full">
+              <label className="text-studio-dark font-fanun text-sm">E-mail</label>
+              <div className="h-10 w-full relative">
+                <input
+                  type="email"
+                  placeholder="seuemail@exemplo.com"
+                  {...register("email", {
+                    required: true,
+                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  })}
+                  className="w-full h-10 rounded-full border border-studio-gray-light bg-white px-5 text-studio-dark font-fanun text-base outline-none"
+                />
+              </div>
+            </div>
+
+            {/* Telefone (opcional) */}
+            <div className="flex flex-col items-start gap-1 w-full">
+              <label className="text-studio-dark font-fanun text-sm">
+                Telefone <span>(opcional)</span>
+              </label>
+              <div className="h-10 w-full relative">
+                <input
+                  type="tel"
+                  placeholder="(11) 99999-1111"
+                  {...register("telefone")}
+                  className="w-full h-10 rounded-full border border-studio-gray-light bg-white px-5 text-studio-dark font-fanun text-base outline-none"
+                />
+              </div>
+            </div>
+
+            {/* Mensagem (opcional) */}
+            <div className="flex flex-col items-start gap-1 w-full">
+              <label className="text-studio-dark font-fanun text-sm">
+                Mensagem <span>(opcional)</span>
+              </label>
+              <div className="w-full relative">
+                <textarea
+                  placeholder="Conte um pouco sobre o que você procura…"
+                  {...register("mensagem")}
+                  className="w-full min-h-24 rounded-2xl border border-studio-gray-light bg-white px-5 py-3 text-studio-dark font-fanun text-base outline-none resize-y"
+                />
+              </div>
+            </div>
+
+            <button
+              disabled={isSubmitting}
+              className="flex h-12 px-6 justify-center items-center gap-2.5 w-full rounded-full bg-studio-dark text-white font-fanun text-lg hover:bg-opacity-90 transition-all disabled:opacity-60"
+            >
+              {isSubmitting ? "Enviando..." : "Receber proposta personalizada"}
+            </button>
+          </form>
+        ) : (
+          // Estado de sucesso simples
+          <div className="w-full rounded-2xl border border-studio-gray-light bg-white p-6 text-studio-dark">
+            <p className="font-fanun text-xl font-bold mb-1">Tudo certo com seu envio.</p>
+            <p className="font-fanun">
+              Seus dados foram enviados. Você receberá uma simulação personalizada em breve.
+            </p>
+            <button
+              className="mt-4 inline-flex h-10 px-5 items-center justify-center rounded-full bg-studio-dark text-white hover:bg-opacity-90"
+              onClick={() => setSent(false)}
+            >
+              Preencher novo formulário
+            </button>
+          </div>
+        )}
+      </div>
+
+      <img
+        src="https://api.builder.io/api/v1/image/assets/TEMP/a0240e2885e5b71dcdcd5ec7119ff9d9c9f469c2?width=1240"
+        alt="Studio apartment exterior"
+        className="w-full lg:h-[605px] lg:flex-1 rounded-lg object-cover"
+      />
+    </section>
+  );
+};
 
 export default Contact;

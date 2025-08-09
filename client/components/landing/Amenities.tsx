@@ -96,8 +96,8 @@ const Amenities = () => {
           <h2 className="text-studio-dark font-fagun text-[32px] font-black">
             Mais comodidade no seu dia a dia
           </h2>
-          <p className="text-studio-gray font-fagun text-xl mt-2">
-            O Studio Universidades foi pensado para proporcionar…
+          <p className="text-studio-gray font-fagun text-xl mt-2  ">
+            O Studio Universidades foi pensado para proporcionar praticidade e conforto em todos os detalhes. Desde ambientes inteligentes até facilidades no prédio, cada diferencial contribui para um dia a dia mais funcional, seguro e conectado com o que você precisa.
           </p>
         </div>
         <div className="flex gap-4">
@@ -122,13 +122,13 @@ const Amenities = () => {
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-[450px] rounded-lg object-cover"
+                className="w-full h-[450px] rounded-lg object-cover z-0"
               />
-              <div className="mt-4 bg-white rounded-lg shadow p-4">
-                <h3 className="text-studio-dark font-fagun text-base font-bold">
+              <div className="relative left-1/2 -translate-x-1/2 bottom-4 w-[300px] h-[110px] rounded-lg bg-white shadow p-4 z-20 flex-col items-center justify-start text-left">
+                <h3 className="text-studio-dark font-fagun text-base font-bold leading-snug">
                   {item.title}
                 </h3>
-                <p className="text-studio-dark font-fagun text-sm mt-1">
+                <p className="text-studio-gray font-fagun text-sm mt-1 leading-snug ">
                   {item.description}
                 </p>
               </div>

@@ -51,7 +51,7 @@ const Decorated = () => {
             placeholder="(11) 99999-1111"
             className="w-full sm:w-40 lg:w-60 px-4 py-3 rounded-full bg-white border border-studio-gray-light text-studio-dark font-fagun font-normal focus:outline-none"
           />
-          <button className="px-6 py-3 ml-[-3px] rounded-full bg-studio-blue text-white font-fagun font-normal hover:bg-opacity-90 transition">
+          <button className="px-6 py-3 ml-[-5rem] rounded-full bg-studio-blue text-white font-fagun font-normal hover:bg-opacity-90 transition">
             Agendar Visita
           </button>
         </div>

@@ -13,8 +13,7 @@ import Amenities from "@/components/landing/Amenities";
 import Location from "@/components/landing/Location";
 import Contact from "@/components/landing/Contact";
 import Footer from "@/components/landing/Footer";
-import FloatingChat from "@/components/landing/FloatingChat";
-
+import FloatingChat from "@/components/landing/FloatingChat"
 // Constants
 const GALLERY_IMAGES: string[] = [
   "https://api.builder.io/api/v1/image/assets/TEMP/3fae655761c71946c78368423bc7d646e6e66e95?width=580",
@@ -77,7 +76,8 @@ const LandingSections = () => (
     <FloorPlan />
     <Amenities />
     <Location />
-    <Contact />
+    <FloatingChat />
+    <Contact/>
     <Footer />
   </div>
 );
@@ -122,8 +122,7 @@ export default function Index() {
     <div className="w-full max-content-wrapper">
       <Header />
       <LandingSections />
-      <FloatingChat />
-      
+
       <Modals 
         galleryModal={galleryModal}
         floorPlanModal={floorPlanModal}
