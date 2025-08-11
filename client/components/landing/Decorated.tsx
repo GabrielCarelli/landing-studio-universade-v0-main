@@ -1,5 +1,82 @@
+import { useState } from "react";
+const HUBSPOT_PREFIX = ""; 
+const FIXED_CITY = "Campinas";
+const portalId = import.meta.env.VITE_PUBLIC_HUBSPOT_PORTAL_ID!;
+const formId  = import.meta.env.VITE_PUBLIC_HUBSPOT_FORM_ID_MONETIZE_RENT!;
+
+function getHubspotUtk() {
+  const match = document.cookie.match(/hubspotutk=([^;]+)/);
+  return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+async function submitToHubspot(payload: any) {
+  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err?.message || `Erro HubSpot: ${res.status}`);
+  }
+}
+
+function toHubspotVisitFields(phone: string) {
+  const fixedName = "LeadStudioUniversidades";
+  const fixedEmail = `${fixedName}@gmail.com`;
+
+  if (HUBSPOT_PREFIX) {
+    return [
+      { name: `${HUBSPOT_PREFIX}_nome`, value: fixedName },
+      { name: `${HUBSPOT_PREFIX}_email`, value: fixedEmail },
+      { name: `${HUBSPOT_PREFIX}_telefone`, value: phone },
+      { name: `${HUBSPOT_PREFIX}_city`, value: FIXED_CITY },
+      { name: `${HUBSPOT_PREFIX}_origem_form`, value: "Agendar Visita - Studio Universidades" },
+    ];
+  }
+  return [
+    { name: "firstname", value: fixedName },
+    { name: "email", value: fixedEmail },
+    { name: "phone", value: phone },
+    { name: "city", value: FIXED_CITY },
+    { name: "origem_form", value: "Agendar Visita - Studio Universidades" }, // opcional
+  ];
+}
 
 const Decorated = () => {
+    const [phone, setPhone] = useState("");
+    const [sending, setSending] = useState(false);
+  
+    const handleVisitSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      const clean = phone.replace(/\D/g, "");
+      if (clean.length < 10) {
+        alert("Digite um telefone válido.");
+        return;
+      }
+      try {
+        setSending(true);
+        const fields = toHubspotVisitFields(phone);
+        const payload = {
+          fields,
+          // contexto ajuda a rastrear a origem no HubSpot (opcional, mas recomendado)
+          context: {
+            hutk: getHubspotUtk(),
+            pageUri: window.location.href,
+            pageName: "Studio Universidades - Hero",
+          },
+        };
+        await submitToHubspot(payload);
+        setPhone("");
+        alert("Recebemos seu telefone! Em breve entraremos em contato. 🙌");
+      } catch (err) {
+        console.error(err);
+        alert("Não foi possível enviar agora. Tente novamente em instantes.");
+      } finally {
+        setSending(false);
+      }
+    };
   return (
     <section className="px-6 sm:px-6 md:px-10 lg:px-20 py-10">
       <div className="flex flex-col lg:flex-row items-center bg-studio-gray-bg rounded-2xl px-6 py-8 gap-8 w-full">
@@ -45,16 +122,22 @@ const Decorated = () => {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
-          <input
-            type="tel"
-            placeholder="(11) 99999-1111"
-            className="w-full sm:w-40 lg:w-60 px-4 py-3 rounded-full bg-white border border-studio-gray-light text-studio-dark font-fagun font-normal focus:outline-none"
-          />
-          <button className="px-6 py-3 ml-[-5rem] rounded-full bg-studio-blue text-white font-fagun font-normal hover:bg-opacity-90 transition">
-            Agendar Visita
-          </button>
-        </div>
+        <form onSubmit={handleVisitSubmit} className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+                <input
+                  type="tel"
+                  placeholder="(11) 99999-1111"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full sm:w-40 lg:w-60 px-4 py-3 rounded-full bg-white border border-studio-gray-light text-studio-dark font-fagun focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="px-6 py-3 lg:ml-[-5rem] md:ml-[-5rem] rounded-full bg-studio-blue text-white font-fagun hover:bg-opacity-90 transition disabled:opacity-70"
+                >
+                  {sending ? "Enviando..." : "Agendar Visita"}
+                </button>
+              </form>
       </div>
     </section>
   );

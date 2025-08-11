@@ -84,7 +84,7 @@ export function Header() {
     ));
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white max-content-wrapper">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white max-content-wrapper ">
       {/* Desktop */}
       <div className="hidden lg:flex  h-20 px-10 items-center max-content-wrapper w-full">
         <Logo />
@@ -119,9 +119,13 @@ export function Header() {
           <SocialIcon />
         </div>
         <ContactButton onClick={() => scrollToSection("contato")} />
-        <div className="flex mx-6 mb-6 px-4 py-2 justify-center items-center gap-1 bg-studio-yellow shadow-[0_4px_12px_0_rgba(0,0,0,0.12)]">
-          <span className="text-studio-blue text-center font-fanun text-base font-normal">Previsão de entrega em:</span>
-          <span className="text-studio-blue font-fanun text-xl font-black">01/09/2025</span>
+        <div className="bg-studio-yellow px-4 py-2 mt-2 shadow-md flex items-center justify-center gap-2">
+          <span className="text-studio-blue font-fanun text-base font-normal">
+            Previsão de entrega em:
+          </span>
+          <span className="text-studio-blue font-fanun text-xl font-black">
+            01/09/2025
+          </span>
         </div>
       </div>
 

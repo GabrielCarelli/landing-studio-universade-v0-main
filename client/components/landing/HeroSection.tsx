@@ -1,4 +1,83 @@
+import { useState } from "react";
+const HUBSPOT_PREFIX = ""; 
+const FIXED_CITY = "Campinas";
+const portalId = import.meta.env.VITE_PUBLIC_HUBSPOT_PORTAL_ID!;
+const formId  = import.meta.env.VITE_PUBLIC_HUBSPOT_FORM_ID_MONETIZE_RENT!;
+
+function getHubspotUtk() {
+  const match = document.cookie.match(/hubspotutk=([^;]+)/);
+  return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+async function submitToHubspot(payload: any) {
+  const url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err?.message || `Erro HubSpot: ${res.status}`);
+  }
+}
+
+function toHubspotVisitFields(phone: string) {
+  const fixedName = "LeadStudioUniversidades";
+  const fixedEmail = `${fixedName}@gmail.com`;
+
+  if (HUBSPOT_PREFIX) {
+    return [
+      { name: `${HUBSPOT_PREFIX}_nome`, value: fixedName },
+      { name: `${HUBSPOT_PREFIX}_email`, value: fixedEmail },
+      { name: `${HUBSPOT_PREFIX}_telefone`, value: phone },
+      { name: `${HUBSPOT_PREFIX}_city`, value: FIXED_CITY },
+      { name: `${HUBSPOT_PREFIX}_origem_form`, value: "Agendar Visita - Studio Universidades" },
+    ];
+  }
+  return [
+    { name: "firstname", value: fixedName },
+    { name: "email", value: fixedEmail },
+    { name: "phone", value: phone },
+    { name: "city", value: FIXED_CITY },
+    { name: "origem_form", value: "Agendar Visita - Studio Universidades" }, // opcional
+  ];
+}
+
+
 const HeroSection = () => {
+  const [phone, setPhone] = useState("");
+  const [sending, setSending] = useState(false);
+
+  const handleVisitSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const clean = phone.replace(/\D/g, "");
+    if (clean.length < 10) {
+      alert("Digite um telefone válido.");
+      return;
+    }
+    try {
+      setSending(true);
+      const fields = toHubspotVisitFields(phone);
+      const payload = {
+        fields,
+        // contexto ajuda a rastrear a origem no HubSpot (opcional, mas recomendado)
+        context: {
+          hutk: getHubspotUtk(),
+          pageUri: window.location.href,
+          pageName: "Studio Universidades - Hero",
+        },
+      };
+      await submitToHubspot(payload);
+      setPhone("");
+      alert("Recebemos seu telefone! Em breve entraremos em contato. 🙌");
+    } catch (err) {
+      console.error(err);
+      alert("Não foi possível enviar agora. Tente novamente em instantes.");
+    } finally {
+      setSending(false);
+    }
+  };
     return(
               
     <section className="relative w-full h-[800px] md:h-[821px] sm:h-[936px] mt-20 md:mt-20 sm:mt-34">
@@ -13,14 +92,11 @@ const HeroSection = () => {
 
         {/* Delivery Tag */}
         <div className="hidden md:flex absolute top-6 right-0 px-6 lg:px-14 justify-end">
-          <div className="w-[344px] lg:w-[353px] px-4 py-2 flex items-center gap-1 bg-studio-yellow shadow-[0_4px_12px_0_rgba(0,0,0,0.12)] rounded">
-            <span className="text-studio-blue font-fanun text-base font-normal">
-              Previsão de entrega em:
-            </span>
-            <span className="text-studio-blue font-fanun text-xl font-black">
-              01/09/2025
-            </span>
-          </div>
+           <div className="absolute top-4 -right-0 bg-studio-yellow px-4 py-2 shadow-md">
+              <p className="text-studio-blue font-fanun md:text-lg text-base font-normal whitespace-nowrap">
+                Previsão de entrega em: <span className="font-black">01/09/2025</span>
+              </p>
+            </div>
         </div>
 
         <div className="relative z-10 flex w-full h-full">
@@ -122,14 +198,22 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-2">
-                <button className="flex w-full sm:w-40 md:w-60 lg:w-60 px-4 sm:px-4 md:px-2 lg:px-2 py-[15px] justify-center items-center rounded-[32px] bg-white text-studio-dark font-fanun text-base font-light">
-                  (11) 99999-1111
+              <form onSubmit={handleVisitSubmit} className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+                <input
+                  type="tel"
+                  placeholder="(11) 99999-1111"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full sm:w-40 lg:w-60 px-4 py-3 rounded-full bg-white border border-studio-gray-light text-studio-dark font-fagun focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="px-6 py-3 lg:ml-[-5rem] md:ml-[-5rem] rounded-full bg-studio-blue text-white font-fagun hover:bg-opacity-90 transition disabled:opacity-70"
+                >
+                  {sending ? "Enviando..." : "Agendar Visita"}
                 </button>
-                <button className="flex w-full lg:ml-[-4rem] sm:w-[173px] md:w-[173px] lg:w-[173px] px-4 sm:px-2 md:px-2 lg:px-2 py-[15px] justify-center items-center rounded-[32px] bg-studio-blue text-white font-fanun text-base font-normal hover:bg-opacity-90 transition-all">
-                  Agendar Visita
-                </button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
