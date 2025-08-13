@@ -57,14 +57,14 @@ const Location = () => {
             className="h-[280px] md:h-[280px] lg:h-[560px] w-full aspect-[18/7] rounded-[32px] object-cover"
           />
 
-          {/* Pílula de endereço (overlay em md+) */}
+          {/* Pílula de endereço - sempre visível como overlay */}
           <div
-            className={`hidden md:flex ${GLASS_CLASSES} absolute left-1/2 -translate-x-1/2 -top-6 
-                        items-center gap-2 px-6 lg:px-8 py-3 max-w-[780px] w-[90%] justify-center`}
+            className={`flex ${GLASS_CLASSES} absolute left-1/2 -translate-x-1/2 top-3 md:-top-6 
+                        items-center gap-2 px-4 md:px-6 lg:px-8 py-2 md:py-3 max-w-[780px] w-[90%] justify-center`}
             aria-label="Endereço"
           >
             <MapPinIcon />
-            <span className="text-studio-dark text-center font-fanun text-sm md:text-base leading-[120%] truncate">
+            <span className="text-studio-dark text-center font-fanun text-xs md:text-base leading-[120%] truncate">
               Rua Valentina Penteado de Freitas, 252 — Parque das Universidades — Campinas/SP
             </span>
           </div>
@@ -81,15 +81,8 @@ const Location = () => {
           </div>
         </div>
 
-        {/* Versões mobile/tablet fora do overlay, com o mesmo efeito */}
-        <div className={`md:hidden ${GLASS_CLASSES} px-6 py-4 w-[312px] mx-auto flex items-center gap-2`} aria-label="Endereço">
-          <MapPinIcon />
-          <span className="text-studio-dark text-center font-fanun text-base leading-[120%]">
-            Rua Valentina Penteado de Freitas, 252 - Parque das Universidades - Campinas/SP
-          </span>
-        </div>
-
-        <div className={`md:hidden ${GLASS_CLASSES} px-6 py-6 w-full max-w-[520px] mx-auto`}>
+        {/* Versão mobile/tablet dos pontos de interesse */}
+        <div className={`lg:hidden ${GLASS_CLASSES} px-6 py-6 w-full max-w-[520px] mx-auto`}>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col md:flex-row gap-6">
               {points.slice(0, 2).map((p) => (

@@ -198,22 +198,43 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              <form onSubmit={handleVisitSubmit} className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+              <form
+                onSubmit={handleVisitSubmit}
+                className="flex flex-row flex-nowrap items-center gap-2 w-full lg:w-auto min-w-0"
+              >
                 <input
                   type="tel"
                   placeholder="(11) 99999-1111"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full sm:w-40 lg:w-60 px-4 py-3 rounded-full bg-white border border-studio-gray-light text-studio-dark font-fagun focus:outline-none"
+                  className="
+                    flex-1 min-w-0
+                    px-3 py-2
+                    sm:px-4 sm:py-3
+                    rounded-full bg-white border border-studio-gray-light text-studio-dark font-fagun
+                    text-sm sm:text-base
+                    focus:outline-none
+                  "
                 />
                 <button
                   type="submit"
                   disabled={sending}
-                  className="px-6 py-3 lg:ml-[-5rem] md:ml-[-5rem] rounded-full bg-studio-blue text-white font-fagun hover:bg-opacity-90 transition disabled:opacity-70"
+                  className="
+                    shrink-0
+                    px-4 py-2
+                    ml-[-5rem]
+                    sm:px-6 sm:py-3
+                    md:ml-[-5rem]
+                    rounded-full bg-studio-blue text-white font-fagun
+                    text-sm sm:text-base
+                    whitespace-nowrap
+                    hover:bg-opacity-90 transition disabled:opacity-70
+                  "
                 >
                   {sending ? "Enviando..." : "Agendar Visita"}
                 </button>
               </form>
+
             </div>
           </div>
         </div>
