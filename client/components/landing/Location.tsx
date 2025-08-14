@@ -23,13 +23,15 @@ const Location = () => {
   );
 
   const PointItem = ({ title, desc }: { title: string; desc: string }) => (
-    <div className="flex items-start gap-2 w-[260px] min-w-[220px]">
+    <div className="flex items-start gap-2 shrink min-w-0 basis-[clamp(160px,22vw,260px)]">
       <CheckPinIcon />
       <div className="min-w-0">
-        <h3 className="text-studio-dark font-fanun text-base lg:text-lg font-bold leading-tight">
+        <h3 className="text-studio-dark font-fanun text-sm lg:text-base xl:text-lg font-bold leading-tight">
           {title}
         </h3>
-        <p className="text-studio-dark/80 font-fanun text-sm leading-snug">{desc}</p>
+        <p className="text-studio-dark/80 font-fanun text-xs lg:text-sm leading-snug break-words">
+          {desc}
+        </p>
       </div>
     </div>
   );
@@ -57,7 +59,7 @@ const Location = () => {
             className="h-[280px] md:h-[280px] lg:h-[560px] w-full aspect-[18/7] rounded-[32px] object-cover"
           />
 
-          {/* Pílula de endereço - sempre visível como overlay */}
+          {/* Pílula de endereço */}
           <div
             className={`flex ${GLASS_CLASSES} absolute left-1/2 -translate-x-1/2 top-3 md:-top-6 
                         items-center gap-2 px-4 md:px-6 lg:px-8 py-2 md:py-3 max-w-[780px] w-[90%] justify-center`}
@@ -72,7 +74,8 @@ const Location = () => {
           {/* Barra de pontos (overlay em lg+) */}
           <div
             className={`hidden lg:flex ${GLASS_CLASSES} absolute left-1/2 -translate-x-1/2 -bottom-6 
-                        w-[92%] px-6 lg:px-10 py-6 flex flex-wrap items-center justify-center gap-6 lg:gap-10`}
+                        w-[92%] px-4 lg:px-6 xl:px-10 py-4 lg:py-6 items-center justify-center
+                        gap-4 lg:gap-6 xl:gap-10 flex-nowrap`}
             aria-label="Pontos de interesse próximos"
           >
             {points.map((p) => (
@@ -81,7 +84,7 @@ const Location = () => {
           </div>
         </div>
 
-        {/* Versão mobile/tablet dos pontos de interesse */}
+        {/* Versão mobile/tablet dos pontos */}
         <div className={`lg:hidden ${GLASS_CLASSES} px-6 py-6 w-full max-w-[520px] mx-auto`}>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col md:flex-row gap-6">

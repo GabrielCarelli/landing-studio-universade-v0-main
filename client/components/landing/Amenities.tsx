@@ -69,17 +69,17 @@ const Amenities = () => {
               description: "Tudo o que você precisa a poucos passos.",
             },
             {
-              image: "https://api.builder.io/api/v1/image/assets/TEMP/2b2cea0b96c73a1d9df0683dd0148b59b5b45151?width=700",
+              image: "https://github.com/GabrielCarelli/images-studio/blob/main/left%20bg%20(7).png?raw=true",
               title: "Bicicletário com recarga elétrica",
               description: "Sustentabilidade e mobilidade urbana integrada.",
             },
             {
-              image: "https://api.builder.io/api/v1/image/assets/TEMP/2b2cea0b96c73a1d9df0683dd0148b59b5b45151?width=700",
+              image: "https://raw.githubusercontent.com/GabrielCarelli/images-studio/refs/heads/main/left%20bg%20(3).png",
               title: "Energia solar fotovoltaica",
               description: "Redução de custos e impacto ambiental.",
             },
             {
-              image: "https://api.builder.io/api/v1/image/assets/TEMP/2b2cea0b96c73a1d9df0683dd0148b59b5b45151?width=700",
+              image: "https://github.com/GabrielCarelli/images-studio/blob/main/left%20bg%20(6).png?raw=true",
               title: "Reúso de água cinza",
               description: "Solução inteligente para irrigação e lavanderia.",
             },

@@ -71,10 +71,10 @@ const Footer = () => {
                       href="https://www.housebit.com.br/find"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex h-10 px-4 py-2 flex-col justify-center items-center gap-2.5 rounded-full border border-studio-blue"
+                      className="flex h-10 px-4 py-2 flex-col justify-center items-center gap-2.5 rounded-full border border-studio-blue hover:bg-studio-blue hover:text-white transition-colors duration-300"
                     >
-                      <div className="flex items-center gap-2">
-                        <span className="text-studio-blue font-fanun text-base font-normal">
+                      <div className="flex items-center gap-2 hover:text-white">
+                        <span className= "font-fanun text-base font-normal hover:text-white">
                           Fale conosco
                         </span>
                       </div>

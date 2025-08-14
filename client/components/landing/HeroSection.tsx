@@ -211,9 +211,10 @@ const HeroSection = () => {
                     flex-1 min-w-0
                     px-3 py-2
                     sm:px-4 sm:py-3
-                    rounded-full bg-white border border-studio-gray-light text-studio-dark font-fagun
+                    rounded-full border-studio-gray-light text-studio-dark font-fagun
                     text-sm sm:text-base
                     focus:outline-none
+                    hover:bg-opacity-90 transition disabled:opacity-70
                   "
                 />
                 <button
@@ -222,7 +223,7 @@ const HeroSection = () => {
                   className="
                     shrink-0
                     px-4 py-2
-                    ml-[-5rem]
+                    ml-[-7rem]
                     sm:px-6 sm:py-3
                     md:ml-[-5rem]
                     rounded-full bg-studio-blue text-white font-fagun

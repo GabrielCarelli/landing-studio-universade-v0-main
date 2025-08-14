@@ -61,7 +61,7 @@ export function FloorPlanModal({ isOpen, onClose }: FloorPlanModalProps) {
           {/* Floor Plan Image */}
           <div className="flex justify-center">
             <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/d15952f2f5f6ace32a9b512d91e2598df8b3ae0d?width=1340"
+              src="https://raw.githubusercontent.com/GabrielCarelli/images-studio/refs/heads/main/floorplan.png"
               alt="Studio floor plan layouts"
               className="w-full max-w-[670px] h-auto rounded-lg"
             />

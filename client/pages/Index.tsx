@@ -76,7 +76,6 @@ const LandingSections = () => (
     <FloorPlan />
     <Amenities />
     <Location />
-    <FloatingChat />
     <Contact/>
     <Footer />
   </div>
@@ -122,6 +121,7 @@ export default function Index() {
     <div className="w-full max-content-wrapper">
       <Header />
       <LandingSections />
+      <FloatingChat />
 
       <Modals 
         galleryModal={galleryModal}

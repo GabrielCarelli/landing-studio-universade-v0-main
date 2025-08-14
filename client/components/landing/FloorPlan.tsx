@@ -14,7 +14,7 @@ const FLOORPLAN = {
   description:
     "Ambiente compacto e bem distribuído, ideal para quem busca praticidade no dia a dia.",
   image:
-    "https://api.builder.io/api/v1/image/assets/TEMP/0b789879d13b58026b4a6223755db5cd9072ccd3?width=800",
+    "https://raw.githubusercontent.com/GabrielCarelli/images-studio/refs/heads/main/floorplan.png",
 };
 
 const FloorPlan = () => {

@@ -2,18 +2,15 @@ import { useState, useCallback, KeyboardEvent, memo } from "react";
 import { GalleryModal } from "../GalleryModal";
 
 
-// =========================
-// Config & Helpers
-// =========================
 const GALLERY_IMAGES: string[] = [
-  "https://api.builder.io/api/v1/image/assets/TEMP/3fae655761c71946c78368423bc7d646e6e66e95?width=580",
-  "https://api.builder.io/api/v1/image/assets/TEMP/f305a2d2bbddf2a21d3c5bdadff06d26e45eeec2?width=580",
-  "https://api.builder.io/api/v1/image/assets/TEMP/b8ce951cc0557707b77c4383287ca6b3472afa28?width=580",
-  "https://api.builder.io/api/v1/image/assets/TEMP/647c10c0c7cad1d16929cdb854b6edecd62f166e?width=580",
-  "https://api.builder.io/api/v1/image/assets/TEMP/fffa0217b6f12d1a913152618da50d90dd2501e0?width=580",
-  "https://api.builder.io/api/v1/image/assets/TEMP/1796dbf2e934ea92e5d3b3c2c3ea985f6651611d?width=580",
-  "https://api.builder.io/api/v1/image/assets/TEMP/9282e47cbe88e05268656314b356582171960f30?width=580",
-  "https://api.builder.io/api/v1/image/assets/TEMP/93bd4d096b44f0fba2ef98af0fbc07a1718afc7d?width=580",
+  "https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.20.jpeg?raw=true",
+  "https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.27%20(1).jpeg?raw=true",
+  "https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.27%20(2).jpeg?raw=true",
+  "https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.27%20(3).jpeg?raw=true",
+  "https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.28%20(1).jpeg?raw=true",
+  "https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.28%20(2).jpeg?raw=true",
+  "https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.28.jpeg?raw=true",
+  "https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.29%20(1).jpeg?raw=true",
 ];
 
 const ROW_HEIGHT = 200; // apenas referência semântica

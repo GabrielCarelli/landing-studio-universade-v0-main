@@ -95,7 +95,7 @@ const Contact = () => {
       className="flex flex-col lg:flex-row lg:h-[600px] px-6 sm:px-6 md:px-10 lg:px-20 items-center gap-10 lg:gap-20 py-20 mb-20"
     >
       <div className="flex w-full lg:w-[580px] flex-col justify-center items-start gap-6">
-        <div className="flex flex-col items-start gap-6 w-full">
+        <div className="flex flex-col items-start gap-6 w-full mb-[-2rem]">
           <h2 className="text-studio-dark font-fanun text-2xl font-black">Quero morar aqui</h2>
           <p className="text-studio-gray font-fanun text-xl font-normal">
             Ficou interessado? Nossos consultores vão entrar em contato.
@@ -115,7 +115,7 @@ const Contact = () => {
 
         {/* FORM */}
         {!sent ? (
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-start gap-6 w-full">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-start gap-6 w-full mb-0">
             {/* Nome */}
             <div className="flex flex-col items-start gap-1 w-full">
               <label className="text-studio-dark font-fanun text-sm">Nome</label>
