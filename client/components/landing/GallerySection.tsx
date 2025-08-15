@@ -1,7 +1,6 @@
 import { useState, useCallback, KeyboardEvent, memo } from "react";
 import { GalleryModal } from "../GalleryModal";
 
-
 const GALLERY_IMAGES: string[] = [
   "https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.20.jpeg?raw=true",
   "https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.27%20(1).jpeg?raw=true",
@@ -110,7 +109,11 @@ const GallerySection = () => {
           {rows.map((row, rowIdx) => (
             <div
               key={`row-${rowIdx}`}
-              className="flex px-4 sm:px-8 lg:px-20 justify-center items-center gap-6 lg:gap-10 overflow-x-auto"
+              className={[
+                "flex px-4 sm:px-8 lg:px-20 justify-center items-center gap-6 lg:gap-10",
+                "overflow-x-auto overflow-y-hidden",
+                "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+              ].join(" ")}
             >
               {row.map((src, i) => {
                 const index = rowIdx * 4 + i;
@@ -137,11 +140,12 @@ const GallerySection = () => {
       <GalleryModal
         isOpen={isGalleryModalOpen}
         onClose={closeModal}
-        images={GALLERY_IMAGES} 
-        currentIndex={currentImageIndex} 
+        images={GALLERY_IMAGES}
+        currentIndex={currentImageIndex}
         onNavigate={function (index: number): void {
           throw new Error("Function not implemented.");
-        } }      />
+        }}
+      />
     </section>
   );
 };

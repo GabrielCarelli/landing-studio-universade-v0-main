@@ -18,7 +18,7 @@ const SocialIcon = () => (
     href="https://www.instagram.com/housebitapp/"
     target="_blank"
     rel="noopener noreferrer"
-    className="w-6 h-6 text-studio-dark hover:text-studio-blue transition-colors"
+    className="w-6 h-6 text-studio-dark hover:text-studio-blue transition-colors shrink-0"
     aria-label="Instagram"
   >
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,15 +49,26 @@ const CloseIcon = () => (
 );
 
 function Logo() {
-  return <h1 className="text-studio-dark text-2xl font-fagun font-black leading-7">Studio Universidade</h1>;
+  return (
+    <h1 className="text-studio-dark text-2xl font-fagun font-black leading-7 shrink-0">
+      Studio Universidade
+    </h1>
+  );
 }
 
-function ContactButton({ onClick }: { onClick: () => void }) {
+function ContactButton({ onClick, className = "" }: { onClick: () => void; className?: string }) {
+  const base =
+    "inline-flex shrink-0 items-center justify-center rounded-full bg-studio-dark text-white font-fanun font-normal leading-tight whitespace-nowrap select-none transition-colors";
+  const sizes = [
+    // Mobile: maior e centralizado
+    "h-11 px-6 text-base",
+    // Tablet
+    "md:h-10 md:px-6 md:text-[clamp(0.95rem,1.8vw,1.05rem)]",
+    // Desktop
+    "lg:h-10 lg:px-8 lg:text-[clamp(1.05rem,1.2vw,1.25rem)]",
+  ].join(" ");
   return (
-    <button
-      onClick={onClick}
-      className="flex h-10 px-8 py-4 justify-center items-center gap-2.5 rounded-full bg-studio-dark text-white font-fanun text-xl font-normal leading-5"
-    >
+    <button onClick={onClick} className={`${base} ${sizes} ${className}`}>
       Entre em contato
     </button>
   );
@@ -77,29 +88,36 @@ export function Header() {
       <button
         key={id}
         onClick={() => scrollToSection(id)}
-        className={className + " hover:text-studio-blue transition-colors"}
+        className={
+          className +
+          " hover:text-studio-blue transition-colors whitespace-nowrap"
+        }
       >
         {label}
       </button>
     ));
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white max-content-wrapper ">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white max-content-wrapper">
       {/* Desktop */}
-      <div className="hidden lg:flex  h-20 px-10 items-center max-content-wrapper w-full">
+      <div className="hidden lg:flex h-20 px-10 items-center max-content-wrapper w-full">
         <Logo />
-        <nav className="flex flex-1 justify-center items-center gap-16">
-          {renderButtons("text-studio-dark font-fagun font-bold text-xl leading-7")}
+        <nav className="flex flex-1 justify-center items-center gap-8 xl:gap-12 2xl:gap-16 flex-nowrap">
+          {renderButtons("text-studio-dark font-fagun font-bold text-base xl:text-lg 2xl:text-xl leading-7")}
         </nav>
-        <div className="flex items-center gap-16">
+        <div className="flex items-center gap-6 xl:gap-10 2xl:gap-16">
           <SocialIcon />
           <ContactButton onClick={() => scrollToSection("contato")} />
         </div>
       </div>
 
       {/* Tablet */}
-      <div className="hidden md:flex lg:hidden w-full h-20 px-10 justify-between items-center max-content-wrapper">
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Menu">
+      <div className="hidden md:flex lg:hidden w-full h-20 px-6 md:px-10 justify-between items-center max-content-wrapper">
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          aria-label="Menu"
+        >
           <MenuIcon />
         </button>
         <Logo />
@@ -111,19 +129,31 @@ export function Header() {
 
       {/* Mobile */}
       <div className="flex md:hidden flex-col w-full bg-white max-content-wrapper">
-        <div className="flex w-full h-16 px-6 justify-between items-center">
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Menu">
+        <div className="flex w-full h-16 px-4 sm:px-6 justify-between items-center">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label="Menu"
+          >
             <MenuIcon />
           </button>
           <Logo />
           <SocialIcon />
         </div>
-        <ContactButton onClick={() => scrollToSection("contato")} />
+
+        {/* Botão centralizado e largo no mobile */}
+        <div className="flex justify-center pb-2">
+          <ContactButton
+            onClick={() => scrollToSection("contato")}
+            className="w-[80%] max-w-xs"
+          />
+        </div>
+
         <div className="bg-studio-yellow px-4 py-2 mt-2 shadow-md flex items-center justify-center gap-2">
-          <span className="text-studio-blue font-fanun text-base font-normal">
+          <span className="text-studio-blue font-fanun text-sm sm:text-base font-normal whitespace-nowrap">
             Previsão de entrega em:
           </span>
-          <span className="text-studio-blue font-fanun text-xl font-black">
+          <span className="text-studio-blue font-fanun text-lg sm:text-xl font-black whitespace-nowrap">
             01/09/2025
           </span>
         </div>
@@ -132,7 +162,10 @@ export function Header() {
       {/* Slide Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-50 md:relative lg:hidden">
-          <div className="fixed inset-0 bg-black bg-opacity-50 md:hidden" onClick={() => setIsMenuOpen(false)} />
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 md:hidden"
+            onClick={() => setIsMenuOpen(false)}
+          />
           <div className="fixed top-0 left-0 w-full md:w-[279px] bg-white rounded-b-[4px] shadow-lg md:absolute md:top-20 md:left-10">
             <div className="flex justify-between items-center px-6 py-4">
               <Logo />
@@ -140,13 +173,18 @@ export function Header() {
                 <CloseIcon />
               </button>
             </div>
-            <div className="px-6 py-4 border-t border-b border-black border-opacity-30">
+            <div className="px-6 py-4 border-t border-b border-black/30">
               <nav className="flex flex-col gap-6">
-                {renderButtons("text-studio-dark font-fanun text-xl font-normal leading-7 text-left")}
+                {renderButtons(
+                  "text-studio-dark font-fanun text-lg md:text-xl font-normal leading-7 text-left"
+                )}
               </nav>
             </div>
-            <div className="px-6 py-6">
-              <ContactButton onClick={() => scrollToSection("contato")} />
+            <div className="flex justify-center px-6 py-6">
+              <ContactButton
+                onClick={() => scrollToSection("contato")}
+                className="w-[80%] max-w-xs"
+              />
             </div>
           </div>
         </div>
