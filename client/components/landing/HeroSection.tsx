@@ -93,8 +93,8 @@ const HeroSection = () => {
         {/* Delivery Tag */}
         <div className="hidden md:flex absolute top-6 right-0 px-6 lg:px-14 justify-end">
            <div className="absolute top-4 -right-0 bg-studio-yellow px-4 py-2 shadow-md">
-              <p className="text-studio-blue font-fanun md:text-lg text-base font-normal whitespace-nowrap">
-                Previsão de entrega em: <span className="font-black">01/09/2025</span>
+              <p className="text-studio-blue font-fagun md:text-lg text-base font-normal whitespace-nowrap">
+                Previsão de entrega em: <span className="font-black">09/2025</span>
               </p>
             </div>
         </div>

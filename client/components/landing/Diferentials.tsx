@@ -5,10 +5,10 @@ const Diferentials = () => {
         className="flex max-w-full px-6 sm:px-6 md:px-10 lg:px-20 py-10 lg:py-20 flex-col justify-center items-center gap-14 bg-white"
       >
         <div className="flex flex-col justify-center items-center gap-4 w-full">
-          <h2 className="text-studio-dark font-fanun text-xl sm:text-2xl md:text-2xl lg:text-[32px] font-black text-center">
+          <h2 className="text-studio-dark font-fagun text-xl sm:text-2xl md:text-2xl lg:text-[32px] font-black text-center">
             Projetado com atenção aos detalhes
           </h2>
-          <p className="text-studio-gray text-center font-fanun text-lg sm:text-xl md:text-xl lg:text-xl font-normal">
+          <p className="text-studio-gray text-center font-fagun text-lg sm:text-xl md:text-xl lg:text-xl font-normal">
             Muito além da praticidade do dia a dia, o Studio Universidades se
             destaca por oferecer soluções que valorizam o imóvel, otimizam os
             espaços e garantem mais qualidade de vida para moradores.
@@ -35,10 +35,10 @@ const Diferentials = () => {
               </svg>
             </div>
             <div className="flex flex-col items-start gap-2 flex-1">
-              <h3 className="text-studio-dark font-fanun text-xl font-bold leading-[120%]">
+              <h3 className="text-studio-dark font-fagun text-xl font-bold leading-[120%]">
                 Padrão de acabamento
               </h3>
-              <p className="text-studio-gray font-fanun text-base font-normal leading-[120%]">
+              <p className="text-studio-gray font-fagun text-base font-normal leading-[120%]">
                 Piso vinílico, bancada em granito e qualidade em cada detalhe.
               </p>
             </div>
@@ -63,10 +63,10 @@ const Diferentials = () => {
               </svg>
             </div>
             <div className="flex flex-col items-start gap-2 flex-1">
-              <h3 className="text-studio-dark font-fanun text-xl font-bold leading-[120%]">
+              <h3 className="text-studio-dark font-fagun text-xl font-bold leading-[120%]">
                 Tudo no lugar certo
               </h3>
-              <p className="text-studio-gray font-fanun text-base font-normal leading-[120%]">
+              <p className="text-studio-gray font-fagun text-base font-normal leading-[120%]">
                 Studio mobiliado e pronto para morar, com eletrodoméstico e ar
                 condicionado.
               </p>
@@ -92,10 +92,10 @@ const Diferentials = () => {
               </svg>
             </div>
             <div className="flex flex-col items-start gap-2 flex-1">
-              <h3 className="text-studio-dark font-fanun text-xl font-bold leading-[120%]">
+              <h3 className="text-studio-dark font-fagun text-xl font-bold leading-[120%]">
                 Perto de tudo
               </h3>
-              <p className="text-studio-gray font-fanun text-base font-normal leading-[120%]">
+              <p className="text-studio-gray font-fagun text-base font-normal leading-[120%]">
                 Próximo a Universidade, Academia e Restaurantes.
               </p>
             </div>

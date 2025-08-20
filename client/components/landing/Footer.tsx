@@ -3,7 +3,7 @@ const Footer = () => {
         <footer className="flex px-6 sm:px-6 md:px-10 lg:px-20 py-10 flex-col justify-center items-start gap-6 bg-studio-gray-bg">
                 <div className="flex flex-col items-center gap-8 w-full">
                   <div className="flex flex-col items-center gap-4">
-                    <span className="text-studio-dark font-fanun text-xl font-normal">
+                    <span className="text-studio-dark font-fagun text-xl font-normal">
                       Powered by
                     </span>
                     <svg
@@ -64,7 +64,7 @@ const Footer = () => {
                   </div>
         
                   <div className="flex flex-col justify-center items-center gap-4">
-                    <span className="text-studio-dark font-fanun text-xl font-normal text-center">
+                    <span className="text-studio-dark font-fagun text-xl font-normal text-center">
                       Quer anunciar seu empreendimento com a Housebit?
                     </span>
                     <a
@@ -74,7 +74,7 @@ const Footer = () => {
                       className="flex h-10 px-4 py-2 flex-col justify-center items-center gap-2.5 rounded-full border border-studio-blue hover:bg-studio-blue hover:text-white transition-colors duration-300"
                     >
                       <div className="flex items-center gap-2 hover:text-white">
-                        <span className= "font-fanun text-base font-normal hover:text-white">
+                        <span className= "font-fagun text-base font-normal hover:text-white">
                           Fale conosco
                         </span>
                       </div>

@@ -35,10 +35,10 @@ const FloorPlan = () => {
       >
         <div className="mx-auto flex w-full items-start justify-between gap-8 lg:gap-12">
           <div className="w-full lg:max-w-[560px]">
-            <h2 className="text-studio-dark font-fanun text-3xl sm:text-4xl lg:text-[40px] leading-tight font-black">
+            <h2 className="text-studio-dark font-fagun text-3xl sm:text-4xl lg:text-[40px] leading-tight font-black">
               Layouts pensados para sua rotina
             </h2>
-            <p className="mt-4 text-studio-gray font-fanun text-base sm:text-lg lg:text-xl max-w-[520px]">
+            <p className="mt-4 text-studio-gray font-fagun text-base sm:text-lg lg:text-xl max-w-[520px]">
               Conheça os layouts disponíveis e escolha o que melhor se adapta ao
               seu estilo de vida. O Studio Universidades oferece plantas
               otimizadas para estudantes e jovens profissionais, com ambientes
@@ -70,10 +70,10 @@ const FloorPlan = () => {
               </div>
 
               <div className="flex-1 min-w-0">
-                <h3 className="text-studio-dark font-fanun text-lg sm:text-xl font-extrabold leading-tight">
+                <h3 className="text-studio-dark font-fagun text-lg sm:text-xl font-extrabold leading-tight">
                   Studio funcional com 24m<sup className="align-super text-xs">2</sup>
                 </h3>
-                <p className="mt-1 text-studio-dark/80 font-fanun text-sm sm:text-base leading-snug">
+                <p className="mt-1 text-studio-dark/80 font-fagun text-sm sm:text-base leading-snug">
                   {FLOORPLAN.description}
                 </p>
 
@@ -82,7 +82,7 @@ const FloorPlan = () => {
                   onClick={modal.openModal}
                   className="
                     mt-4 inline-flex items-center gap-2
-                    text-studio-dark font-fanun text-sm sm:text-base
+                    text-studio-dark font-fagun text-sm sm:text-base
                     hover:opacity-90 transition
                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-dark/40 rounded-md
                   "
@@ -128,17 +128,17 @@ const FloorPlan = () => {
             </div>
 
             <div className="flex-1 min-w-0">
-              <h3 className="text-studio-dark font-fanun text-lg font-extrabold leading-tight">
+              <h3 className="text-studio-dark font-fagun text-lg font-extrabold leading-tight">
                 Studio funcional com 24m<sup className="align-super text-[10px]">2</sup>
               </h3>
-              <p className="mt-1 text-studio-dark/80 font-fanun text-sm leading-snug">
+              <p className="mt-1 text-studio-dark/80 font-fagun text-sm leading-snug">
                 {FLOORPLAN.description}
               </p>
 
               <button
                 type="button"
                 onClick={modal.openModal}
-                className="mt-4 inline-flex items-center gap-1.5 text-studio-dark font-fanun text-sm hover:opacity-90 transition"
+                className="mt-4 inline-flex items-center gap-1.5 text-studio-dark font-fagun text-sm hover:opacity-90 transition"
                 aria-label="Ver detalhes da planta"
               >
                 Ver detalhes

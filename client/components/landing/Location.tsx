@@ -1,3 +1,6 @@
+import { useMemo, useRef } from "react";
+import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+
 const Location = () => {
   const GLASS_CLASSES =
     "bg-white/55 backdrop-blur-md backdrop-saturate-150 ring-1 ring-white/50 border border-white/30 shadow-md rounded-[32px]";
@@ -26,24 +29,42 @@ const Location = () => {
     <div className="flex items-start gap-2 shrink min-w-0 basis-[clamp(160px,22vw,260px)]">
       <CheckPinIcon />
       <div className="min-w-0">
-        <h3 className="text-studio-dark font-fanun text-sm lg:text-base xl:text-lg font-bold leading-tight">
+        <h3 className="text-studio-dark font-fagun text-sm lg:text-base xl:text-lg font-bold leading-tight">
           {title}
         </h3>
-        <p className="text-studio-dark/80 font-fanun text-xs lg:text-sm leading-snug break-words">
+        <p className="text-studio-dark/80 font-fagun text-xs lg:text-sm leading-snug break-words">
           {desc}
         </p>
       </div>
     </div>
   );
 
+  // TODO: ajuste as coordenadas para o endereço exato
+  const center = useMemo(
+    () => ({ lat: -22.8903, lng: -47.0502 }), // placeholder (Campinas região). Troque para o ponto do Studio.
+    []
+  );
+  const zoom = 15;
+
+  // Loader do Maps
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: import.meta.env.VITE_PUBLIC_GOOGLE_MAPS_API_KEY as string,
+    version: "weekly",
+    libraries: ["marker"], // p/ AdvancedMarkerElement
+  });
+
+  // Referência para remover o marcador quando desmontar
+  const markerRef = useRef<google.maps.marker.AdvancedMarkerElement | null>(null);
+
   return (
     <section id="localizacao" className="flex max-w-full flex-col items-start gap-6 py-20">
       {/* Cabeçalho */}
       <div className="flex flex-col items-center gap-6 w-full px-6 sm:px-6 md:px-10 lg:px-20">
-        <h2 className="text-studio-dark font-fanun text-xl sm:text-2xl md:text-2xl lg:text-[32px] font-black text-center">
+        <h2 className="text-studio-dark font-fagun text-xl sm:text-2xl md:text-2xl lg:text-[32px] font-black text-center">
           Localização estratégica em Campinas
         </h2>
-        <p className="text-studio-dark text-center font-fanun text-lg sm:text-xl md:text-xl lg:text-xl font-normal max-w-[1174px]">
+        <p className="text-studio-dark text-center font-fagun text-lg sm:text-xl md:text-xl lg:text-xl font-normal max-w-[1174px]">
           A poucos passos da PUC-Campinas, hospitais, supermercados e outros serviços essenciais, o
           Studio Universidades está em uma das regiões mais valorizadas da cidade. Ideal para quem
           busca mobilidade, segurança e praticidade no dia a dia.
@@ -53,11 +74,48 @@ const Location = () => {
       {/* Mapa + Overlays */}
       <div className="flex flex-col items-center gap-6 w-full px-6 sm:px-6 md:px-10 lg:px-20">
         <div className="relative w-full">
-          <img
-            src="https://api.builder.io/api/v1/image/assets/TEMP/e563373a49c87f5bcbb34b6b423502f43d870499?width=2880"
-            alt="Mapa da região do Studio Universidades em Campinas"
-            className="h-[280px] md:h-[280px] lg:h-[560px] w-full aspect-[18/7] rounded-[32px] object-cover"
-          />
+          <div className="h-[280px] md:h-[280px] lg:h-[560px] w-full rounded-[32px] overflow-hidden">
+            {isLoaded ? (
+              <GoogleMap
+                mapContainerStyle={{ width: "100%", height: "100%" }}
+                center={center}
+                zoom={zoom}
+                options={{
+                  disableDefaultUI: true,
+                  zoomControl: true,
+                  fullscreenControl: false,
+                  streetViewControl: false,
+                  gestureHandling: "greedy",
+                  styles: [
+                    { elementType: "geometry", stylers: [{ saturation: -10 }] },
+                    { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+                  ],
+                }}
+                onLoad={(map) => {
+                  // limpa marcador anterior
+                  if (markerRef.current) {
+                    markerRef.current.map = null;
+                    markerRef.current = null;
+                  }
+                  // cria AdvancedMarkerElement
+                  const { AdvancedMarkerElement } = google.maps.marker;
+                  markerRef.current = new AdvancedMarkerElement({
+                    map,
+                    position: center,
+                    title: "Studio Universidades",
+                  });
+                }}
+                onUnmount={() => {
+                  if (markerRef.current) {
+                    markerRef.current.map = null;
+                    markerRef.current = null;
+                  }
+                }}
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-100 animate-pulse" />
+            )}
+          </div>
 
           {/* Pílula de endereço */}
           <div
@@ -66,7 +124,7 @@ const Location = () => {
             aria-label="Endereço"
           >
             <MapPinIcon />
-            <span className="text-studio-dark text-center font-fanun text-xs md:text-base leading-[120%] truncate">
+            <span className="text-studio-dark text-center font-fagun text-xs md:text-base leading-[120%] truncate">
               Rua Valentina Penteado de Freitas, 252 — Parque das Universidades — Campinas/SP
             </span>
           </div>

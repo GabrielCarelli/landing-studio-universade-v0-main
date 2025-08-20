@@ -92,13 +92,13 @@ export function GalleryModal({
 
         {/* Texto de topo */}
         <div className="px-6 pt-8 pb-4 text-center">
-          <p className="text-studio-gray font-fanun text-xs sm:text-sm">
+          <p className="text-studio-gray font-fagun text-xs sm:text-sm">
             Explore os ambientes antes de visitar pessoalmente
           </p>
-          <h2 className="text-studio-dark font-fanun text-lg sm:text-2xl font-black mt-1">
+          <h2 className="text-studio-dark font-fagun text-lg sm:text-2xl font-black mt-1">
             Veja cada detalhe do seu futuro lar
           </h2>
-          <p className="text-studio-gray font-fanun text-xs sm:text-sm leading-relaxed max-w-3xl mx-auto mt-3">
+          <p className="text-studio-gray font-fagun text-xs sm:text-sm leading-relaxed max-w-3xl mx-auto mt-3">
             Conheça os detalhes do empreendimento em imagens que destacam o
             conforto, a praticidade e o estilo de vida que o Studio
             Universidade oferece. Cada ambiente foi pensado para atender às

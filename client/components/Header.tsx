@@ -58,7 +58,7 @@ function Logo() {
 
 function ContactButton({ onClick, className = "" }: { onClick: () => void; className?: string }) {
   const base =
-    "inline-flex shrink-0 items-center justify-center rounded-full bg-studio-dark text-white font-fanun font-normal leading-tight whitespace-nowrap select-none transition-colors";
+    "inline-flex shrink-0 items-center justify-center rounded-full bg-studio-dark text-white font-fagun font-normal leading-tight whitespace-nowrap select-none transition-colors";
   const sizes = [
     // Mobile: maior e centralizado
     "h-11 px-6 text-base",
@@ -150,11 +150,11 @@ export function Header() {
         </div>
 
         <div className="bg-studio-yellow px-4 py-2 mt-2 shadow-md flex items-center justify-center gap-2">
-          <span className="text-studio-blue font-fanun text-sm sm:text-base font-normal whitespace-nowrap">
+          <span className="text-studio-blue font-fagun text-sm sm:text-base font-normal whitespace-nowrap">
             Previsão de entrega em:
           </span>
-          <span className="text-studio-blue font-fanun text-lg sm:text-xl font-black whitespace-nowrap">
-            01/09/2025
+          <span className="text-studio-blue font-fagun text-lg sm:text-xl font-black whitespace-nowrap">
+            09/2025
           </span>
         </div>
       </div>
@@ -176,7 +176,7 @@ export function Header() {
             <div className="px-6 py-4 border-t border-b border-black/30">
               <nav className="flex flex-col gap-6">
                 {renderButtons(
-                  "text-studio-dark font-fanun text-lg md:text-xl font-normal leading-7 text-left"
+                  "text-studio-dark font-fagun text-lg md:text-xl font-normal leading-7 text-left"
                 )}
               </nav>
             </div>

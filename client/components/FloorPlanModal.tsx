@@ -30,10 +30,10 @@ export function FloorPlanModal({ isOpen, onClose }: FloorPlanModalProps) {
           {/* Header */}
           <div className="flex justify-between items-start gap-6 mb-6">
             <div className="flex flex-col gap-2 flex-1">
-              <h2 className="text-studio-dark font-fanun text-2xl md:text-[32px] font-bold leading-[120%]">
+              <h2 className="text-studio-dark font-fagun text-2xl md:text-[32px] font-bold leading-[120%]">
                 Studio funcional com 24m²
               </h2>
-              <p className="text-studio-dark font-fanun text-lg md:text-2xl font-normal leading-[120%] max-w-[712px]">
+              <p className="text-studio-dark font-fagun text-lg md:text-2xl font-normal leading-[120%] max-w-[712px]">
                 Ambiente compacto e bem distribuído, ideal para quem busca
                 praticidade no dia a dia.
               </p>

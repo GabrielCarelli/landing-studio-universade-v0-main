@@ -87,14 +87,14 @@ const GallerySection = () => {
       {/* Header */}
       <div className="flex px-6 sm:px-6 md:px-10 lg:px-20 flex-col justify-center items-center gap-4 w-full">
         <div className="flex flex-col items-center gap-1">
-          <p className="max-w-4xl text-studio-gray text-center font-fanun text-base sm:text-base md:text-xl lg:text-xl font-normal">
+          <p className="max-w-4xl text-studio-gray text-center font-fagun text-base sm:text-base md:text-xl lg:text-xl font-normal">
             Explore os ambientes antes de visitar pessoalmente
           </p>
-          <h2 className="max-w-[568px] text-studio-dark font-fanun text-xl sm:text-2xl md:text-[32px] lg:text-[32px] font-black text-center">
+          <h2 className="max-w-[568px] text-studio-dark font-fagun text-xl sm:text-2xl md:text-[32px] lg:text-[32px] font-black text-center">
             Veja cada detalhe do seu futuro lar
           </h2>
         </div>
-        <p className="text-studio-gray text-center font-fanun text-lg sm:text-xl md:text-xl lg:text-xl font-normal max-w-full">
+        <p className="text-studio-gray text-center font-fagun text-lg sm:text-xl md:text-xl lg:text-xl font-normal max-w-full">
           Conheça os detalhes do empreendimento em imagens que destacam o
           conforto, a praticidade e o estilo de vida que o Studio Universidade
           oferece. Cada ambiente foi pensado para atender às necessidades de
