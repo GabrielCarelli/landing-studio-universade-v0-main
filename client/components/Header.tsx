@@ -100,9 +100,9 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white max-content-wrapper">
       {/* Desktop */}
-      <div className="hidden lg:flex h-20 px-10 items-center max-content-wrapper w-full">
+      <div className="hidden lg:flex h-20 px-10 items-center max-content-wrapper w-full ">
         <Logo />
-        <nav className="flex flex-1 justify-center items-center gap-8 xl:gap-12 2xl:gap-16 flex-nowrap">
+        <nav className="flex flex-1 justify-center items-center gap-8 xl:gap-12 2xl:gap-16 flex-nowrap ml-6">
           {renderButtons("text-studio-dark font-fagun font-bold text-base xl:text-lg 2xl:text-xl leading-7")}
         </nav>
         <div className="flex items-center gap-6 xl:gap-10 2xl:gap-16">
