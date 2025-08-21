@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 const HUBSPOT_PREFIX = ""; 
 const FIXED_CITY = "Campinas";
 const portalId = import.meta.env.VITE_PUBLIC_HUBSPOT_PORTAL_ID!;
@@ -22,61 +23,79 @@ async function submitToHubspot(payload: any) {
   }
 }
 
-function toHubspotVisitFields(phone: string) {
-  const fixedName = "LeadStudioUniversidades";
-  const fixedEmail = `${fixedName}@gmail.com`;
+// Helper para (opcionalmente) prefixar nomes de propriedades
+const F = (name: string) => (HUBSPOT_PREFIX ? `${HUBSPOT_PREFIX}_${name}` : name);
 
-  if (HUBSPOT_PREFIX) {
-    return [
-      { name: `${HUBSPOT_PREFIX}_nome`, value: fixedName },
-      { name: `${HUBSPOT_PREFIX}_email`, value: fixedEmail },
-      { name: `${HUBSPOT_PREFIX}_telefone`, value: phone },
-      { name: `${HUBSPOT_PREFIX}_city`, value: FIXED_CITY },
-      { name: `${HUBSPOT_PREFIX}_origem_form`, value: "Agendar Visita - Studio Universidades" },
-    ];
-  }
-  return [
-    { name: "firstname", value: fixedName },
-    { name: "email", value: fixedEmail },
-    { name: "phone", value: phone },
-    { name: "city", value: FIXED_CITY },
-    { name: "origem_form", value: "Agendar Visita - Studio Universidades" }, // opcional
+/**
+ * Variant Studio:
+ * - firstname = "<telefoneLimpo> Lead Studio Taquaral"
+ * - email = "<telefoneLimpo>@gmail.com"
+ * - phone = "<telefoneLimpo>"
+ * - NÃO enviar property_detail
+ * - sales_contact_type = "Inquilino"
+ * - interest = "Studio Universidades"
+ * - city = "Campinas"
+ * - nome_da_imobiliaria = "EasyStudios (Studio Taquaral)"
+ * - tipo_de_imovel = "Studio"
+ * - finalidade = "Locação"
+ * - property_type = "Residencial"
+ */
+function toHubspotVisitFields(rawPhone: string) {
+  const clean = rawPhone.replace(/\D/g, "");
+
+  const fields = [
+    { name: F("firstname"), value: `${clean} Lead Studio Taquaral` },
+    { name: F("email"), value: `${clean}@gmail.com` },
+    { name: F("phone"), value: clean },
+
+    { name: F("sales_contact_type"), value: "Inquilino" },
+    { name: F("interest"), value: "Studio Universidades" },
+    { name: F("city"), value: FIXED_CITY },
+    { name: F("nome_da_imobiliaria"), value: "EasyStudios (Studio Taquaral)" },
+    { name: F("tipo_de_imovel"), value: "Studio" },
+    { name: F("finalidade"), value: "Locação" },
+    { name: F("property_type"), value: "Residencial" },
+
+    // (Opcional) rastrear origem da conversão nesta seção de Decorados:
+    // { name: F("origem_form"), value: "Agendar Visita - Studio Universidades (Decorados)" },
   ];
+
+  return fields as { name: string; value: string }[];
 }
 
 const Decorated = () => {
-    const [phone, setPhone] = useState("");
-    const [sending, setSending] = useState(false);
-  
-    const handleVisitSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      const clean = phone.replace(/\D/g, "");
-      if (clean.length < 10) {
-        alert("Digite um telefone válido.");
-        return;
-      }
-      try {
-        setSending(true);
-        const fields = toHubspotVisitFields(phone);
-        const payload = {
-          fields,
-          // contexto ajuda a rastrear a origem no HubSpot (opcional, mas recomendado)
-          context: {
-            hutk: getHubspotUtk(),
-            pageUri: window.location.href,
-            pageName: "Studio Universidades - Hero",
-          },
-        };
-        await submitToHubspot(payload);
-        setPhone("");
-        alert("Recebemos seu telefone! Em breve entraremos em contato. 🙌");
-      } catch (err) {
-        console.error(err);
-        alert("Não foi possível enviar agora. Tente novamente em instantes.");
-      } finally {
-        setSending(false);
-      }
-    };
+  const [phone, setPhone] = useState("");
+  const [sending, setSending] = useState(false);
+
+  const handleVisitSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const clean = phone.replace(/\D/g, "");
+    if (clean.length < 10) {
+      alert("Digite um telefone válido.");
+      return;
+    }
+    try {
+      setSending(true);
+      const fields = toHubspotVisitFields(phone);
+      const payload = {
+        fields,
+        context: {
+          hutk: getHubspotUtk(),
+          pageUri: window.location.href,
+          pageName: "Studio Universidades - Decorados",
+        },
+      };
+      await submitToHubspot(payload);
+      setPhone("");
+      alert("Recebemos seu telefone! Em breve entraremos em contato. 🙌");
+    } catch (err) {
+      console.error(err);
+      alert("Não foi possível enviar agora. Tente novamente em instantes.");
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <section className="px-6 sm:px-6 md:px-10 lg:px-20 py-10">
       <div className="flex flex-col lg:flex-row items-center bg-studio-gray-bg rounded-2xl px-6 py-8 gap-8 w-full">
