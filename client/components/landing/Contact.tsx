@@ -22,29 +22,34 @@ if (!portalId || !formId) {
   console.log("HubSpot não configurado corretamente");
 }
 
+/**
+ * Mapeia os campos do formulário para as propriedades do HubSpot:
+ * - firstname, email, phone, property_detail, sales_contact_type, interest,
+ *   city, nome_da_imobiliaria, tipo_de_imovel, finalidade, property_type.
+ *
+ * Se quiser usar prefixo, preencha HUBSPOT_PREFIX (ex.: "leadstudio")
+ * e garanta que esses campos existam no HubSpot.
+ */
 function toHubspotFields(data: FormValues) {
-  if (HUBSPOT_PREFIX) {
-    return [
-      { name: `${HUBSPOT_PREFIX}_nome`, value: data.nome },
-      { name: `${HUBSPOT_PREFIX}_email`, value: data.email },
-      data.telefone
-        ? { name: `${HUBSPOT_PREFIX}_mobilephone`, value: data.telefone }
-        : null,
-      data.mensagem
-        ? { name: `${HUBSPOT_PREFIX}_mensagem`, value: data.mensagem }
-        : null,
-      { name: `${HUBSPOT_PREFIX}_origem_form`, value: "Contato - Studio Universidades" },
-      { name: `${HUBSPOT_PREFIX}_city`, value: FIXED_CITY },
-    ].filter(Boolean) as { name: string; value: string }[];
-  }
+  const F = (name: string) => (HUBSPOT_PREFIX ? `${HUBSPOT_PREFIX}_${name}` : name);
 
   return [
-    { name: "firstname", value: data.nome },
-    { name: "email", value: data.email },
-    // 🔁 Mapeando para o campo padrão do HubSpot "mobilephone"
-    data.telefone ? { name: "mobilephone", value: data.telefone } : null,
-    data.mensagem ? { name: "message", value: data.mensagem } : null,
-    { name: "city", value: FIXED_CITY },
+    { name: F("firstname"), value: data.nome },
+    { name: F("email"), value: data.email },
+    data.telefone ? { name: F("phone"), value: data.telefone } : null,
+    data.mensagem ? { name: F("property_detail"), value: data.mensagem } : null,
+
+    // Campos fixos solicitados
+    { name: F("sales_contact_type"), value: "Inquilino" },
+    { name: F("interest"), value: "Studio Universidades / Soul Taquaral" },
+    { name: F("city"), value: FIXED_CITY },
+    {
+      name: F("nome_da_imobiliaria"),
+      value: "EasyStudios (Studio Taquaral) / De Sodi Broker (Soul Taquaral)",
+    },
+    { name: F("tipo_de_imovel"), value: "Studio (Studio Taquaral) / Casa (Soul Taquaral)" },
+    { name: F("finalidade"), value: "Locação (Studio Taquaral) / Venda (Soul Taquaral)" },
+    { name: F("property_type"), value: "Residencial" },
   ].filter(Boolean) as { name: string; value: string }[];
 }
 
@@ -153,25 +158,25 @@ const Contact = () => {
                   placeholder="Conte um pouco sobre o que você procura…"
                   rows={3}
                   {...register("mensagem")}
-                  className="w-full px-5 py-3 border border-soul-light-gray rounded-2xl text-base placeholder-soul-light-gray resize-none font-fagun"
+                  className="w-full px-5 py-3 border border-studio-light-gray rounded-2xl text-base placeholder-soul-light-gray resize-none font-fagun"
                 />
               </div>
 
               <button
                 disabled={isSubmitting}
-                className="w-full bg-soul-dark text-white py-4 px-8 rounded-full text-xl font-fagun font-normal hover:bg-opacity-90 transition-all disabled:opacity-60"
+                className="w-full bg-studio-dark text-white py-4 px-8 rounded-full text-xl font-fagun font-normal hover:bg-opacity-90 transition-all disabled:opacity-60"
               >
                 {isSubmitting ? "Enviando..." : "Receber proposta personalizada"}
               </button>
             </form>
           ) : (
-            <div className="w-full rounded-2xl border border-soul-light-gray bg-white p-6 text-soul-dark">
+            <div className="w-full rounded-2xl border border-studio-light-gray bg-white p-6 text-studio-dark">
               <p className="font-fagun text-xl font-bold mb-1">Tudo certo com seu envio.</p>
               <p className="font-fagun">
                 Seus dados foram enviados. Você receberá uma simulação personalizada em breve.
               </p>
               <button
-                className="mt-4 inline-flex h-10 px-5 items-center justify-center rounded-full bg-soul-dark text-white hover:bg-opacity-90"
+                className="mt-4 inline-flex h-10 px-5 items-center justify-center rounded-full bg-studio-dark text-white hover:bg-opacity-90"
                 onClick={() => setSent(false)}
               >
                 Preencher novo formulário
@@ -182,9 +187,9 @@ const Contact = () => {
 
         {/* Imagem */}
         <img
-          src="https://api.builder.io/api/v1/image/assets/TEMP/0484e0ab5bfcfe3a9893d70f576911772b44ee28?width=1240"
+          src="https://github.com/GabrielCarelli/images-studio/blob/main/WhatsApp%20Image%202025-06-06%20at%2011.24.25%20(3).jpeg?raw=true"
           alt="Imagem de contato"
-          className="w-full lg:flex-1 lg:h-[605px] object-cover rounded-lg mb-[-5rem] "
+          className="w-96 lg:flex-1 lg:h-[605px] object-cover rounded-lg mb-[-5rem] "
         />
       </div>
     </section>

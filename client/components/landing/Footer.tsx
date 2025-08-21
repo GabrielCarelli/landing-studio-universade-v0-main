@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="flex px-6 sm:px-6 md:px-10 lg:px-20 py-10 flex-col justify-center items-start gap-6 bg-studio-gray-bg">
+    <footer className="flex px-6 sm:px-6 md:px-10 lg:px-20 py-10 flex-col justify-center items-start gap-6 bg-studio-gray-bg mt-14">
       <div className="flex flex-col items-center gap-8 w-full">
 
         {/* Empreendimento realizado por */}
@@ -11,12 +11,12 @@ const Footer = () => {
           <img
             src="https://github.com/GabrielCarelli/images-studio/blob/main/easystudio.jpg?raw=true"
             alt="Logo da Construtora"
-            className="h-10 object-contain ml-5"
+            className="h-20 object-contain ml-3 mt-[-8px]"
           />
         </div>
 
         {/* Linha divisória */}
-        <div className="w-full border-t border-black"></div>
+        <div className="w-full border-t border-t-studio-gray"></div>
 
         {/* Powered by + logo */}
         <div className="flex flex-col items-center gap-4">
