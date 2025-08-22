@@ -22,33 +22,25 @@ if (!portalId || !formId) {
   console.log("HubSpot não configurado corretamente");
 }
 
-/**
- * Mapeia os campos do formulário para as propriedades do HubSpot:
- * - firstname, email, phone, property_detail, sales_contact_type, interest,
- *   city, nome_da_imobiliaria, tipo_de_imovel, finalidade, property_type.
- *
- * Se quiser usar prefixo, preencha HUBSPOT_PREFIX (ex.: "leadstudio")
- * e garanta que esses campos existam no HubSpot.
- */
 function toHubspotFields(data: FormValues) {
   const F = (name: string) => (HUBSPOT_PREFIX ? `${HUBSPOT_PREFIX}_${name}` : name);
 
   return [
     { name: F("firstname"), value: data.nome },
     { name: F("email"), value: data.email },
-    data.telefone ? { name: F("phone"), value: data.telefone } : null,
+    data.telefone ? { name: F("mobilephone"), value: data.telefone } : null,
     data.mensagem ? { name: F("property_detail"), value: data.mensagem } : null,
 
     // Campos fixos solicitados
     { name: F("sales_contact_type"), value: "Inquilino" },
-    { name: F("interest"), value: "Studio Universidades / Soul Taquaral" },
+    { name: F("interest"), value: "Studio Universidades" },
     { name: F("city"), value: FIXED_CITY },
     {
       name: F("nome_da_imobiliaria"),
-      value: "EasyStudios (Studio Taquaral) / De Sodi Broker (Soul Taquaral)",
+      value: "EasyStudios",
     },
-    { name: F("tipo_de_imovel"), value: "Studio (Studio Taquaral) / Casa (Soul Taquaral)" },
-    { name: F("finalidade"), value: "Locação (Studio Taquaral) / Venda (Soul Taquaral)" },
+    { name: F("tipo_de_imovel"), value: "Studio" },
+    { name: F("finalidade"), value: "Locação" },
     { name: F("property_type"), value: "Residencial" },
   ].filter(Boolean) as { name: string; value: string }[];
 }

@@ -26,27 +26,13 @@ async function submitToHubspot(payload: any) {
 // Helper para (opcionalmente) prefixar nomes de propriedades
 const F = (name: string) => (HUBSPOT_PREFIX ? `${HUBSPOT_PREFIX}_${name}` : name);
 
-/**
- * Variant Studio:
- * - firstname = "<telefoneLimpo> Lead Studio Taquaral"
- * - email = "<telefoneLimpo>@gmail.com"
- * - phone = "<telefoneLimpo>"
- * - NÃO enviar property_detail
- * - sales_contact_type = "Inquilino"
- * - interest = "Studio Universidades"
- * - city = "Campinas"
- * - nome_da_imobiliaria = "EasyStudios (Studio Taquaral)"
- * - tipo_de_imovel = "Studio"
- * - finalidade = "Locação"
- * - property_type = "Residencial"
- */
 function toHubspotVisitFields(rawPhone: string) {
   const clean = rawPhone.replace(/\D/g, "");
 
   const fields = [
     { name: F("firstname"), value: `${clean} Lead Studio Taquaral` },
     { name: F("email"), value: `${clean}@gmail.com` },
-    { name: F("phone"), value: clean },
+    { name: F("mobilephone"), value: clean },
 
     { name: F("sales_contact_type"), value: "Inquilino" },
     { name: F("interest"), value: "Studio Universidades" },
@@ -56,8 +42,6 @@ function toHubspotVisitFields(rawPhone: string) {
     { name: F("finalidade"), value: "Locação" },
     { name: F("property_type"), value: "Residencial" },
 
-    // (Opcional) rastrear origem da conversão nesta seção de Decorados:
-    // { name: F("origem_form"), value: "Agendar Visita - Studio Universidades (Decorados)" },
   ];
 
   return fields as { name: string; value: string }[];
@@ -79,11 +63,7 @@ const Decorated = () => {
       const fields = toHubspotVisitFields(phone);
       const payload = {
         fields,
-        context: {
-          hutk: getHubspotUtk(),
-          pageUri: window.location.href,
-          pageName: "Studio Universidades - Decorados",
-        },
+
       };
       await submitToHubspot(payload);
       setPhone("");

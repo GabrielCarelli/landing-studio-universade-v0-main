@@ -46,7 +46,7 @@ function toHubspotVisitFields(phone: string) {
   const fields = [
     { name: F("firstname"), value: `${clean} Lead Studio Taquaral` },
     { name: F("email"), value: `${clean}@gmail.com` },
-    { name: F("phone"), value: clean },
+    { name: F("mobilephone"), value: clean },
 
     { name: F("sales_contact_type"), value: "Inquilino" },
     { name: F("interest"), value: "Studio Universidades" },
@@ -79,12 +79,6 @@ const HeroSection = () => {
       const fields = toHubspotVisitFields(phone);
       const payload = {
         fields,
-        // contexto ajuda a rastrear a origem no HubSpot (opcional, mas recomendado)
-        context: {
-          hutk: getHubspotUtk(),
-          pageUri: window.location.href,
-          pageName: "Studio Universidades - Hero",
-        },
       };
       await submitToHubspot(payload);
       setPhone("");
