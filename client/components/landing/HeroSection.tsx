@@ -23,23 +23,8 @@ async function submitToHubspot(payload: any) {
   }
 }
 
-// Helper para (opcionalmente) prefixar nomes de propriedades
 const F = (name: string) => (HUBSPOT_PREFIX ? `${HUBSPOT_PREFIX}_${name}` : name);
 
-/**
- * Studio variant:
- * - firstname = "<telefoneLimpo> Lead Studio Taquaral"
- * - email = "<telefoneLimpo>@gmail.com"
- * - phone = "<telefoneLimpo>"
- * - sales_contact_type = "Inquilino"
- * - interest = "Studio Universidades"
- * - city = "Campinas"
- * - nome_da_imobiliaria = "EasyStudios (Studio Taquaral)"
- * - tipo_de_imovel = "Studio"
- * - finalidade = "Locação"
- * - property_type = "Residencial"
- * - NÃO enviar property_detail
- */
 function toHubspotVisitFields(phone: string) {
   const clean = phone.replace(/\D/g, ""); // ex.: 11999991111
 
@@ -56,8 +41,6 @@ function toHubspotVisitFields(phone: string) {
     { name: F("finalidade"), value: "Locação" },
     { name: F("property_type"), value: "Residencial" },
 
-    // (Opcional) rastrear origem do envio:
-    // { name: F("origem_form"), value: "Agendar Visita - Studio Universidades" },
   ];
 
   return fields as { name: string; value: string }[];
